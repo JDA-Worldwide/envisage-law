@@ -73,19 +73,19 @@ export default function IpTechnologyPage() {
       {/* Trademark Portfolio Highlight */}
       <section className="py-16 lg:py-20">
         <Container>
-          <div className="rounded-lg bg-brand-primary px-10 py-12 text-white lg:px-12">
-            <div className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-brand-accent">
+          <div className="rounded-lg bg-brand-primary px-8 py-10 text-center text-white lg:px-12">
+            <div className="text-base font-bold uppercase tracking-[0.1em] text-brand-accent">
               Featured Capability · Ongoing Relationship
             </div>
-            <h3 className="mb-4 text-[26px] font-extrabold lg:text-[28px]">Trademark Portfolio Management</h3>
-            <p className="max-w-[640px] text-[15px] leading-[1.7] text-white/90">
+            <h3 className="mt-1 mb-4 text-[28px] font-extrabold text-white lg:text-[32px]">Trademark Portfolio Management</h3>
+            <p className="text-[16px] leading-[1.7] text-white/90">
               Portfolio selection, clearance, registration, policing, and enforcement, managed worldwide as an ongoing
               relationship rather than a single filing. We treat your marks as a living asset, watching for conflicts and
               acting before they become disputes.
             </p>
-            <div className="mt-7 flex flex-wrap gap-2.5">
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
               {["Selection", "Clearance", "Registration", "Policing", "Enforcement"].map((step) => (
-                <span key={step} className="rounded-full border border-white/25 px-4 py-2 text-[13px] font-semibold">{step}</span>
+                <span key={step} className="rounded-full border border-white/25 px-5 py-2.5 text-[15px] font-semibold">{step}</span>
               ))}
             </div>
           </div>
