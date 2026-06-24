@@ -25,7 +25,7 @@ export default function AttorneysPage() {
 
       {/* Attorney Grid */}
       <section className="py-section">
-        <Container>
+        <Container className="max-w-[1200px]">
           <div className="mb-10 flex items-center gap-5">
             <h2 className="whitespace-nowrap text-sm font-bold uppercase tracking-[0.14em] text-brand-primary">Attorneys</h2>
             <div className="h-px flex-1 bg-brand-border" />
@@ -47,19 +47,19 @@ export default function AttorneysPage() {
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {staff.map((s) => (
-              <div key={s.name} className="flex items-center gap-4">
-                <div className="h-[72px] w-[72px] flex-none overflow-hidden rounded-full bg-brand-primary">
+              <div key={s.name} className="flex items-center gap-5">
+                <div className="h-[108px] w-[108px] flex-none overflow-hidden rounded-full bg-brand-primary">
                   {s.photo ? (
-                    <Image src={s.photo} alt={s.name} width={72} height={72} className="h-full w-full object-cover" loading="lazy" />
+                    <Image src={s.photo} alt={s.name} width={184} height={184} className="h-full w-full object-cover" loading="lazy" />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-[22px] font-bold text-white" role="img" aria-label={s.name}>
+                    <div className="flex h-full w-full items-center justify-center text-[28px] font-bold text-white" role="img" aria-label={s.name}>
                       {s.initials}
                     </div>
                   )}
                 </div>
                 <div>
-                  <div className="text-base font-bold text-brand-primary">{s.name}</div>
-                  <div className="text-[13px] text-brand-muted">{s.role}</div>
+                  <div className="text-lg font-bold text-brand-primary">{s.name}</div>
+                  <div className="text-sm text-brand-muted">{s.role}</div>
                 </div>
               </div>
             ))}

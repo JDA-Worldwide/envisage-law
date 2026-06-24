@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
 import ArticleCard from "@/components/envisage/ArticleCard";
-import { PracticeIcon, GlobeIcon } from "@/components/envisage/Icons";
+import { PracticeIcon } from "@/components/envisage/Icons";
 import { articles, attorneys } from "@/lib/data";
 
 interface Props {
@@ -58,7 +58,7 @@ export default async function ArticlePage({ params }: Props) {
             <span>·</span>
             <span>6 min read</span>
           </div>
-          <h1 className="max-w-[18ch] text-[clamp(30px,4.2vw,46px)] font-extrabold leading-[1.12]">
+          <h1 className="max-w-[18ch] text-[clamp(30px,4.2vw,46px)] font-extrabold leading-[1.12] text-white">
             {article.title}
           </h1>
           <div className="mt-7 flex items-center gap-3.5">
@@ -119,15 +119,6 @@ export default async function ArticlePage({ params }: Props) {
             </p>
           </article>
 
-          {/* Translation Notice */}
-          <div className="mt-12 flex gap-4 rounded-md bg-brand-surface p-5 text-[13.5px] leading-[1.6] text-brand-muted">
-            <GlobeIcon className="mt-0.5 h-[22px] w-[22px] flex-none text-brand-secondary" />
-            <div>
-              <strong className="text-brand-primary">Translation notice.</strong> Machine translation of this content
-              (Spanish / Mandarin) is provided for first-touch comprehension only and is not certified for legal
-              precision. For advice you can rely on, please contact an attorney directly.
-            </div>
-          </div>
         </Container>
       </section>
 

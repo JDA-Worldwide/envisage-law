@@ -38,14 +38,14 @@ export default function RegulatoryHealthcarePage() {
       />
 
       {/* Positioning */}
-      <section className="py-section">
+      <section className="py-16 lg:py-20">
         <Container className="max-w-[880px]">
-          <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Positioning</p>
+          <p className="mb-4 text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Positioning</p>
           <p className="text-[clamp(19px,2.2vw,25px)] font-light leading-[1.6] text-brand-primary">
             The past century saw an increasing shift of lawmaking from the legislative to executive branches. What happens
             in administrative agencies matters.
           </p>
-          <p className="mt-[22px] max-w-[720px] text-[19px] font-light leading-[1.65] text-brand-muted">
+          <p className="mt-5 text-[16px] leading-[1.7] text-brand-muted">
             Federal agencies annually publish tens of thousands of pages of orders, notices, and rulemakings; the Code of
             Federal Regulations spans 50 titles governing commercial activity. We position our clients for success under a
             variety of regulatory regimes, including those issued under the Food, Drug, and Cosmetic Act, HIPAA, and FIFRA.

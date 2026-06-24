@@ -124,12 +124,12 @@ export default function AboutPage() {
 
       {/* Areas of Focus */}
       <section className="bg-brand-surface py-section-sm">
-        <Container className="max-w-[960px]">
+        <Container>
           <p className="mb-2 text-center text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Where We Concentrate</p>
-          <h2 className="mb-8 text-center text-[clamp(24px,3vw,34px)] font-extrabold text-brand-primary">Areas of Focus</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <h2 className="mb-10 text-center text-[clamp(24px,3vw,34px)] font-extrabold text-brand-primary">Areas of Focus</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              "IP Litigation: Patents, Trademarks, Copyrights, Trade Secrets",
+              "IP Litigation",
               "Complex Commercial Litigation",
               "Technology Law",
               "Regulatory Disputes & Analysis",
@@ -138,9 +138,9 @@ export default function AboutPage() {
               "Contracts & Licensing",
               "Trademark & Copyright",
             ].map((chip) => (
-              <div key={chip} className="flex items-center gap-3 rounded-md border border-brand-border bg-white px-5 py-3.5">
-                <span className="h-2 w-2 flex-none rounded-full bg-brand-secondary" />
-                <span className="text-[14px] font-semibold text-brand-primary">{chip}</span>
+              <div key={chip} className="flex items-center gap-3 rounded-md border border-brand-border bg-white px-5 py-5">
+                <span className="h-2.5 w-2.5 flex-none rounded-full bg-brand-accent" />
+                <span className="text-[18px] font-bold text-brand-primary">{chip}</span>
               </div>
             ))}
           </div>

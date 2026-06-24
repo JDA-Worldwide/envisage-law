@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Hero from "@/components/envisage/Hero";
-import { PhoneIcon, EmailIcon, MapPinIcon, GlobeIcon } from "@/components/envisage/Icons";
+import { PhoneIcon, MapPinIcon, CreditCardIcon } from "@/components/envisage/Icons";
 import { STOCK_IMAGES, PHONE, PHONE_TEL } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Contact Envisage Law directly by phone or email. PO Box 30099, Raleigh, North Carolina 27622 · ${PHONE}.`,
+  description: `Contact Envisage Law directly by phone. PO Box 30099, Raleigh, North Carolina 27622 · ${PHONE}.`,
 };
 
 export default function ContactPage() {
@@ -22,7 +22,7 @@ export default function ContactPage() {
       {/* Direct Methods */}
       <section className="py-section">
         <Container>
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-3">
             <a href={PHONE_TEL} aria-label={`Call Envisage Law at ${PHONE}`} className="group block rounded-lg border border-brand-border bg-white p-10 transition-all hover:-translate-y-1 hover:border-brand-secondary hover:shadow-md focus-visible:ring-2 focus-visible:ring-brand-secondary focus-visible:ring-offset-2">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-brand-primary text-white">
                 <PhoneIcon className="h-[26px] w-[26px]" />
@@ -31,18 +31,6 @@ export default function ContactPage() {
               <div className="text-[clamp(22px,2.4vw,30px)] font-extrabold text-brand-primary">{PHONE}</div>
               <div className="mt-2 text-sm text-brand-muted">Speak with our team directly.</div>
             </a>
-            <a href="mailto:info@envisage.law" aria-label="Email Envisage Law at info@envisage.law" className="group block rounded-lg border border-brand-border bg-white p-10 transition-all hover:-translate-y-1 hover:border-brand-secondary hover:shadow-md focus-visible:ring-2 focus-visible:ring-brand-secondary focus-visible:ring-offset-2">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-brand-primary text-white">
-                <EmailIcon className="h-[26px] w-[26px]" />
-              </div>
-              <div className="mb-2 text-[13px] font-bold uppercase tracking-[0.1em] text-brand-muted">Email</div>
-              <div className="text-[clamp(22px,2.4vw,30px)] font-extrabold text-brand-primary">info@envisage.law</div>
-              <div className="mt-2 text-sm text-brand-muted">We&apos;ll route you to the right attorney.</div>
-            </a>
-          </div>
-
-          {/* Mailing + Pending */}
-          <div className="mt-6 grid gap-6 sm:grid-cols-2">
             <div className="rounded-lg border border-brand-border bg-white p-10">
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-brand-primary text-white">
                 <MapPinIcon className="h-[26px] w-[26px]" />
@@ -51,24 +39,18 @@ export default function ContactPage() {
               <div className="text-[22px] font-extrabold leading-[1.3] text-brand-primary">
                 Envisage Law<br />PO Box 30099<br />Raleigh, NC 27622
               </div>
+              {/* NOTE: "notes" copy pending client review */}
               <div className="mt-2 text-sm text-brand-muted">Correspondence is received by PO Box only.</div>
             </div>
-            <div className="flex flex-col gap-6">
-              <div className="flex items-center gap-[18px] rounded-lg border-2 border-dashed border-brand-border bg-white px-8 py-7">
-                <span className="flex-none rounded-full bg-[rgba(254,179,0,0.12)] px-3 py-[5px] text-[11px] font-bold uppercase tracking-[0.1em] text-brand-accent">
-                  Pending
-                </span>
-                <div>
-                  <div className="text-base font-bold text-brand-primary">Online payments via LawPay</div>
-                  <div className="text-sm text-brand-muted">A secure payment link will appear here once activated. Not yet live.</div>
-                </div>
+            <div className="rounded-lg border-2 border-dashed border-brand-border bg-white p-10">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-brand-primary text-white">
+                <CreditCardIcon className="h-[26px] w-[26px]" />
               </div>
-              <div className="flex flex-1 gap-4 rounded-md bg-brand-surface p-5 text-[13.5px] leading-[1.6] text-brand-muted">
-                <GlobeIcon className="mt-0.5 h-[22px] w-[22px] flex-none text-brand-secondary" />
-                <div>
-                  <strong className="text-brand-primary">Translation notice.</strong> Spanish and Mandarin translation
-                  (coming soon) is provided for first-touch comprehension only and is not certified for legal precision.
-                </div>
+              <div className="mb-2 text-[13px] font-bold uppercase tracking-[0.1em] text-brand-muted">Payments</div>
+              <div className="text-[22px] font-extrabold leading-[1.3] text-brand-primary">Online via LawPay</div>
+              <div className="mt-2 text-sm text-brand-muted">
+                <span className="rounded-full bg-[rgba(254,179,0,0.12)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.1em] text-brand-accent">Pending</span>
+                <span className="ml-2">Secure payment link coming soon.</span>
               </div>
             </div>
           </div>
@@ -114,8 +96,8 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,31,70,0.85)] via-[rgba(0,31,70,0.55)] to-[rgba(0,31,70,0.35)]" />
         <Container className="relative z-[2]">
-          <p className="max-w-[16ch] text-[clamp(24px,3.2vw,38px)] font-extrabold leading-[1.15] text-white" style={{ textShadow: "0 2px 24px rgba(0,0,0,0.35)" }}>
-            Proudly based in Raleigh, North Carolina.
+          <p className="text-[clamp(24px,3.2vw,38px)] font-extrabold leading-[1.15] text-white" style={{ textShadow: "0 2px 24px rgba(0,0,0,0.35)" }}>
+            Proudly based in<br />Raleigh, North Carolina.
           </p>
         </Container>
       </section>

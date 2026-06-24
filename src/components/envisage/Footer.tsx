@@ -91,6 +91,12 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Translation notice */}
+        <p className="border-b border-white/[0.12] py-5 text-[12.5px] leading-[1.6] text-white/55">
+          <strong className="text-white/70">Translation notice.</strong> Spanish and Mandarin translation
+          (coming soon) is provided for first-touch comprehension only and is not certified for legal precision.
+        </p>
+
         {/* Bottom bar */}
         <div className="flex flex-wrap items-center justify-between gap-5 py-7 text-[13px] text-white/75">
           <span>
