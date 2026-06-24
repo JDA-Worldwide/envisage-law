@@ -7,9 +7,9 @@ export default function RecognitionCard() {
 
   return (
     <section className="border-y border-brand-border bg-brand-surface">
-      <div className="mx-auto max-w-[var(--max-width-content)] px-4 py-14 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-content px-4 py-14 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-[980px] flex-wrap items-stretch overflow-hidden rounded-xl border border-brand-border bg-white shadow-sm">
-          {/* Seal */}
+          {/* Seal — TODO: Replace placeholder SVG with real Best Law Firms® badge asset */}
           <div className="flex flex-1 items-center gap-[18px] border-r border-brand-border px-9 py-[30px]" style={{ flexBasis: 320 }}>
             <svg className="h-14 w-14 flex-none" viewBox="0 0 56 56" fill="none" aria-hidden="true">
               <circle cx="28" cy="28" r="26" fill="#fff" stroke="#FEB300" strokeWidth="2.5" />

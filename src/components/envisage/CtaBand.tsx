@@ -15,7 +15,7 @@ export default function CtaBand({ backgroundImage, eyebrow, title, subtitle, act
       <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: `url('${backgroundImage}')` }} />
       <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[rgba(0,31,70,0.95)] via-[rgba(0,31,70,0.85)] to-[rgba(0,31,70,0.7)]" />
       <Container className="relative z-[2] text-center">
-        <div className="mx-auto max-w-[640px]">
+        <div className="mx-auto max-w-[850px]">
           <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-[#6fb0c2]">{eyebrow}</p>
           <h2 className="text-[clamp(30px,4vw,46px)] font-extrabold leading-[1.12] text-white">{title}</h2>
           {subtitle && (

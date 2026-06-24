@@ -26,7 +26,7 @@ export default function Hero({
 
       <div
         className={cn(
-          "relative z-10 mx-auto max-w-[var(--container-content)] px-4 py-20 text-center sm:px-6 lg:px-8",
+          "relative z-10 mx-auto max-w-content px-4 py-20 text-center sm:px-6 lg:px-8",
           backgroundImage?.asset ? "text-white" : "text-brand-text-heading"
         )}
       >

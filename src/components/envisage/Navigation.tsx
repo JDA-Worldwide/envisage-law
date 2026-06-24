@@ -33,7 +33,7 @@ export default function Navigation() {
     <header className="sticky top-0 z-40 flex h-[var(--header-height)] items-center border-b border-white/[0.08] bg-brand-primary">
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex w-full max-w-[var(--max-width-content)] items-center justify-between px-4 sm:px-6 lg:px-8"
+        className="mx-auto flex w-full max-w-content items-center justify-between px-4 sm:px-6 lg:px-8"
       >
         {/* Logo */}
         <Link href="/" className="flex items-center transition-opacity hover:opacity-80" aria-label="Envisage Law home">
@@ -199,24 +199,23 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
         role="menu"
         aria-orientation="vertical"
         className={cn(
-          "absolute left-1/2 top-[calc(100%+14px)] z-50 min-w-[280px] -translate-x-1/2 rounded border-t-[3px] border-t-brand-secondary bg-white p-2.5 shadow-lg transition-all",
+          "absolute left-1/2 top-[calc(100%+14px)] z-50 w-[340px] -translate-x-1/2 rounded border-t-[3px] border-t-brand-secondary bg-white p-2.5 shadow-lg transition-all",
           open ? "visible translate-y-0 opacity-100" : "invisible translate-y-2 opacity-0"
         )}
       >
-        {item.children?.map((child) => (
-          <Link
-            key={child.href}
-            href={child.href}
-            role="menuitem"
-            className="block rounded px-3.5 py-2.5 text-sm font-semibold text-brand-primary hover:bg-brand-surface hover:text-brand-secondary-dark focus-visible:ring-2 focus-visible:ring-brand-secondary"
-            onClick={() => setOpen(false)}
-          >
-            {child.label}
-            {child.description && (
-              <span className="mt-0.5 block text-xs font-normal text-brand-muted">{child.description}</span>
-            )}
-          </Link>
-        ))}
+        <div className="grid grid-cols-2 gap-x-1">
+          {item.children?.map((child) => (
+            <Link
+              key={child.href}
+              href={child.href}
+              role="menuitem"
+              className="block rounded px-3.5 py-2.5 text-sm font-semibold text-brand-primary hover:bg-brand-surface hover:text-brand-secondary-dark focus-visible:ring-2 focus-visible:ring-brand-secondary"
+              onClick={() => setOpen(false)}
+            >
+              {child.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

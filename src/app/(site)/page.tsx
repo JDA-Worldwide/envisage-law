@@ -42,7 +42,7 @@ export default function HomePage() {
 
       {/* Firm Intro */}
       <section className="py-section" aria-labelledby="firm-intro-heading">
-        <Container className="max-w-[var(--max-width-content)]">
+        <Container>
           <div className="mx-auto max-w-[880px] text-center">
             <h2 id="firm-intro-heading" className="sr-only">About Envisage Law</h2>
             <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">

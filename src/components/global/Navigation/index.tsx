@@ -35,7 +35,7 @@ export default function Navigation({ data, siteTitle }: NavigationProps) {
     <header className="sticky top-0 z-40 border-b border-brand-border bg-brand-background/95 backdrop-blur">
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex max-w-[var(--container-content)] items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+        className="mx-auto flex max-w-content items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
       >
         <Link href="/" className="font-display text-xl font-bold text-brand-primary">
           {siteTitle || "JDA Catalyst"}
