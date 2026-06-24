@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="grid gap-12 border-b border-white/[0.12] py-[72px] sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.2fr]">
           {/* Brand */}
           <div>
-            <Image src={LOGO_URL} alt="Envisage Law" width={180} height={36} className="mb-[22px] h-9 w-auto" />
+            <Image src={LOGO_URL} alt="Envisage Law" width={180} height={24} className="mb-[22px] h-[24px] w-auto" />
             <p className="max-w-[320px] text-sm leading-[1.7] text-white/75">
               A litigation-first boutique firm in Raleigh, North Carolina. We represent clients in high-stakes business
               and intellectual property litigation, constitutional and regulatory matters nationwide.

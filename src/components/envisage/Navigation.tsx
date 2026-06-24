@@ -37,7 +37,7 @@ export default function Navigation() {
       >
         {/* Logo */}
         <Link href="/" className="flex items-center transition-opacity hover:opacity-80" aria-label="Envisage Law home">
-          <Image src={LOGO_URL} alt="Envisage Law" width={180} height={38} className="h-[38px] w-auto" priority />
+          <Image src={LOGO_URL} alt="Envisage Law" width={180} height={24} className="h-[24px] w-auto" priority />
         </Link>
 
         {/* Desktop nav */}
