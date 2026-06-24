@@ -38,8 +38,7 @@ export interface Article {
   excerpt: string;
 }
 
-export const LOGO_URL =
-  "https://envisage.law/wp-content/uploads/2023/12/Envisage-Law-Firm-White-3.png";
+export const LOGO_URL = "/envisage-law-logo.svg";
 
 export const PHONE = "919.268.8998";
 export const PHONE_TEL = "tel:9192688998";
