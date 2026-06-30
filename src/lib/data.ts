@@ -137,10 +137,10 @@ export const staff: StaffMember[] = [
     photo: "https://envisage.law/wp-content/uploads/2025/09/Sarah-McGrath-Legal-Administrative-Assistant.jpg",
   },
   {
-    name: "Jennifer",
+    name: "Jennifer Partridge",
     role: "Paralegal",
     photo: "",
-    initials: "J",
+    initials: "JP",
   },
 ];
 

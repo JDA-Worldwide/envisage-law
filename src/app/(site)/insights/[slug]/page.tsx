@@ -67,7 +67,7 @@ export default async function ArticlePage({ params }: Props) {
             <span>·</span>
             <span>6 min read</span>
           </div>
-          <h1 className="max-w-[18ch] text-[clamp(30px,4.2vw,46px)] font-extrabold leading-[1.12] text-white">
+          <h1 className="text-[clamp(30px,4.2vw,46px)] font-extrabold leading-[1.12] text-white">
             {article.title}
           </h1>
           <div className="mt-7 flex items-center gap-3.5">
