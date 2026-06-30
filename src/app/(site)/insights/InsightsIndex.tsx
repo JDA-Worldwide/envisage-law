@@ -4,11 +4,21 @@ import { useState } from "react";
 import ArticleCard from "@/components/envisage/ArticleCard";
 import { articles } from "@/lib/data";
 
+const PER_PAGE = 6;
+
 export default function InsightsIndex() {
   const tags = ["All", ...Array.from(new Set(articles.map((a) => a.tag)))];
   const [active, setActive] = useState("All");
+  const [page, setPage] = useState(1);
 
   const filtered = active === "All" ? articles : articles.filter((a) => a.tag === active);
+  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+  const paged = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+
+  const handleFilter = (tag: string) => {
+    setActive(tag);
+    setPage(1);
+  };
 
   return (
     <>
@@ -16,7 +26,7 @@ export default function InsightsIndex() {
         {tags.map((tag) => (
           <button
             key={tag}
-            onClick={() => setActive(tag)}
+            onClick={() => handleFilter(tag)}
             aria-pressed={tag === active}
             className={`rounded-full border-[1.5px] px-[18px] py-[9px] text-[13px] font-semibold tracking-[0.03em] transition-all focus-visible:ring-2 focus-visible:ring-brand-secondary focus-visible:ring-offset-2 ${
               tag === active
@@ -29,10 +39,42 @@ export default function InsightsIndex() {
         ))}
       </div>
       <div className="grid gap-[26px] sm:grid-cols-2 lg:grid-cols-3" aria-live="polite">
-        {filtered.map((a) => (
+        {paged.map((a) => (
           <ArticleCard key={a.slug} article={a} />
         ))}
       </div>
+
+      {totalPages > 1 && (
+        <div className="mt-12 flex items-center justify-center gap-2">
+          <button
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1}
+            className="rounded-sm border border-brand-border px-4 py-2 text-sm font-semibold text-brand-primary transition-all hover:bg-brand-primary hover:text-white disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-brand-primary"
+          >
+            Previous
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+            <button
+              key={p}
+              onClick={() => setPage(p)}
+              className={`h-10 w-10 rounded-sm text-sm font-semibold transition-all ${
+                p === page
+                  ? "bg-brand-primary text-white"
+                  : "border border-brand-border text-brand-primary hover:bg-brand-primary hover:text-white"
+              }`}
+            >
+              {p}
+            </button>
+          ))}
+          <button
+            onClick={() => setPage(page + 1)}
+            disabled={page === totalPages}
+            className="rounded-sm border border-brand-border px-4 py-2 text-sm font-semibold text-brand-primary transition-all hover:bg-brand-primary hover:text-white disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-brand-primary"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </>
   );
 }
