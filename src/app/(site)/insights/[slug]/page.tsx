@@ -109,6 +109,7 @@ export default async function ArticlePage({ params }: Props) {
       </section>
 
       {/* Related */}
+      {(relatedPractice || authorPhoto) && (
       <section className="bg-brand-surface py-section">
         <Container className="max-w-[880px]">
           <div className="mb-10 flex items-center gap-5">
@@ -146,6 +147,7 @@ export default async function ArticlePage({ params }: Props) {
           </div>
         </Container>
       </section>
+      )}
 
       {/* More Insights */}
       <section className="py-section">
