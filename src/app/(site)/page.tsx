@@ -3,7 +3,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Hero from "@/components/envisage/Hero";
 import PracticeCard from "@/components/envisage/PracticeCard";
-import AttorneyCard from "@/components/envisage/AttorneyCard";
+import AttorneyCarousel from "@/components/envisage/AttorneyCarousel";
 import ArticleCard from "@/components/envisage/ArticleCard";
 import RecognitionCard from "@/components/envisage/RecognitionCard";
 import CtaBand from "@/components/envisage/CtaBand";
@@ -17,8 +17,6 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const featuredSlugs = ["anthony-biller", "james-lawrence", "adam-banks", "joelle-harvill"];
-  const featuredAttorneys = featuredSlugs.map((s) => attorneys.find((a) => a.slug === s)!);
 
   return (
     <>
@@ -166,23 +164,7 @@ export default function HomePage() {
       {/* Featured Attorneys */}
       <section className="bg-brand-surface py-section">
         <Container>
-          <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Our Attorneys</p>
-              <h2 className="text-[clamp(30px,4vw,46px)] font-extrabold text-brand-primary">Meet our attorneys</h2>
-            </div>
-            <Link
-              href="/attorneys"
-              className="inline-flex items-center gap-2.5 rounded-sm border-2 border-brand-primary bg-transparent px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-brand-primary transition-all hover:bg-brand-primary hover:text-white"
-            >
-              All Attorneys <ArrowIcon />
-            </Link>
-          </div>
-          <div className="grid gap-[26px] sm:grid-cols-2 lg:grid-cols-4">
-            {featuredAttorneys.map((a) => (
-              <AttorneyCard key={a.slug} attorney={a} showNiche />
-            ))}
-          </div>
+          <AttorneyCarousel attorneys={attorneys} />
         </Container>
       </section>
 
