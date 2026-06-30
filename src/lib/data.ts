@@ -36,6 +36,8 @@ export interface Article {
   featured?: boolean;
   title: string;
   excerpt: string;
+  authorSlug?: string;
+  authorName?: string;
 }
 
 export const LOGO_URL = "/envisage-law-logo.svg";
@@ -201,77 +203,149 @@ export const practices: PracticeArea[] = [
 
 export const articles: Article[] = [
   {
-    slug: "trademark-portfolio-strategy",
+    slug: "protecting-your-brand-trademark-selection-clearance",
     tag: "IP & Technology",
-    date: "May 28, 2026",
+    date: "December 1, 2025",
     featured: true,
-    title: "Building a Trademark Portfolio That Scales With Your Business",
+    title: "Protecting Your Brand: A Strategic Guide to Trademark Selection and Clearance",
     excerpt:
-      "How selection, clearance, registration, policing, and enforcement work best as an ongoing relationship that grows alongside your business.",
+      "The biblical principle that \u201Ca good name is more desirable than great riches\u201D (Proverbs 22:1) resonates profoundly in today\u2019s marketplace, where your brand identity represents the cornerstone of your business\u2019s goodwill and reputation.",
+    authorSlug: "anthony-biller",
   },
   {
-    slug: "social-media-first-amendment",
-    tag: "Regulatory & Healthcare",
-    date: "May 12, 2026",
-    title: "The First Amendment Meets Social Media: Lessons From Recent Litigation",
-    excerpt:
-      "Path-breaking reinstatement cases are redrawing the line between platform moderation and protected speech. What it means for clients facing deplatforming.",
-  },
-  {
-    slug: "fda-administrative-procedure",
-    tag: "Regulatory & Healthcare",
-    date: "Apr 30, 2026",
-    title: "Navigating the Administrative Procedure Act in an Era of Agency Rulemaking",
-    excerpt:
-      "Federal agencies publish tens of thousands of pages of rules each year. How regulated businesses can position themselves for success and challenge overreach.",
-  },
-  {
-    slug: "trade-secret-departing-employees",
-    tag: "IP & Technology",
-    date: "Apr 16, 2026",
-    title: "Trade Secret Protection When Key Employees Leave",
-    excerpt:
-      "Policies, agreements, and the practical steps that determine whether your most valuable information walks out the door with a departing employee.",
-  },
-  {
-    slug: "construction-payment-disputes",
-    tag: "Construction & Commercial",
-    date: "Mar 27, 2026",
-    title: "Resolving Construction Payment Disputes Before They Reach the Courthouse",
-    excerpt:
-      "Lien rights, contract mechanics, and early-resolution strategies for contractors and developers facing payment and delay claims.",
-  },
-  {
-    slug: "hipaa-data-breach-response",
-    tag: "Data Privacy & Security",
-    date: "Mar 9, 2026",
-    title: "HIPAA and the First 72 Hours After a Data Breach",
-    excerpt:
-      "A practical framework for regulated organizations responding to a security incident involving protected health information.",
-  },
-  {
-    slug: "nonprofit-board-governance",
+    slug: "nc-personal-privacy-protection-act-nonprofits",
     tag: "Nonprofit & Ministry",
-    date: "Feb 21, 2026",
-    title: "Governance Essentials for Nonprofit and Ministry Boards",
+    date: "November 1, 2025",
+    title: "North Carolina\u2019s New Personal Privacy Protection Act: What Nonprofits Need to Know",
     excerpt:
-      "Fiduciary duties, conflict policies, and the governance structures that keep mission-driven organizations out of disputes.",
+      "Starting December 1, 2025, a new North Carolina law gives nonprofits stronger tools to protect their supporters\u2019 privacy. Known as the Personal Privacy Protection Act (Session Law 2025-79), this law is now part of Chapter 55A, the state\u2019s Nonprofit Corporation Act.",
+    authorSlug: "joelle-harvill",
   },
   {
-    slug: "appellate-strategy-federal",
+    slug: "open-source-ai-and-the-law",
+    tag: "Data Privacy & Security",
+    date: "October 20, 2025",
+    title: "Open Source, AI, and the Law: A Week of Insight and Innovation",
+    excerpt:
+      "On October 13, 2025, I kicked off a week immersed in the dynamic intersection of technology and law. My journey began at All Things Open 2025\u2014the largest open-source, tech, and web conference on the East Coast\u2014hosted in Raleigh, North Carolina, one of the nation\u2019s fastest-growing technology hubs.",
+    authorSlug: "joelle-harvill",
+  },
+  {
+    slug: "nc-supreme-court-greenlights-claims-insurance-agent",
+    tag: "Construction & Commercial",
+    date: "May 30, 2025",
+    title: "North Carolina Supreme Court Greenlights Claims Against Insurance Agent",
+    excerpt:
+      "Last week, in an opinion with implications for small businesses and insurance brokers, the Supreme Court of North Carolina ruled that a homeowner who \u201Ctrusted\u201D in an insurance agent\u2019s \u201Cassurance that it would accurately fill out the application\u201D stated a claim for negligence and punitive damages.",
+    authorSlug: "james-lawrence",
+  },
+  {
+    slug: "neuralink-files-telepathy-telekinesis-trademarks",
     tag: "IP & Technology",
-    date: "Feb 4, 2026",
-    title: "Preserving the Record: Appellate Strategy Begins at Trial",
+    date: "March 9, 2025",
+    title: "Neuralink Files \u2018Telepathy\u2019 and \u2018Telekinesis\u2019 Trademarks",
     excerpt:
-      "How objections, evidentiary rulings, and jury instructions at trial determine whether an appeal can be won.",
+      "Elon Musk\u2019s brain implant company Neuralink has filed trademark applications for futuristic terms like \u2018Telepathy\u2019 and \u2018Telekinesis\u2019 with the United States Patent and Trademark Office, signaling ambitious plans for brain-computer interface technology that could revolutionize human-machine interaction and communication.",
+    authorSlug: "anthony-biller",
   },
   {
-    slug: "hoa-enforcement-limits",
-    tag: "HOA & Community Association",
-    date: "Jan 19, 2026",
-    title: "The Limits of HOA Enforcement Authority in North Carolina",
+    slug: "envisage-law-expands-western-north-carolina",
+    tag: "Firm News",
+    date: "January 25, 2025",
+    title: "Envisage Law Expands Into Vibrant Western North Carolina",
     excerpt:
-      "What community association boards can and cannot do when enforcing covenants, and how to avoid liability in the process.",
+      "Exciting news for Western North Carolina! We\u2019re thrilled to announce that Adam Banks, a partner at Envisage Law, has relocated to Asheville.",
+    authorName: "Envisage Law",
+  },
+  {
+    slug: "big-four-camels-nose-lawfirm-tent",
+    tag: "Firm News",
+    date: "January 19, 2025",
+    title: "The Big Four\u2019s Camel\u2019s Nose Is About to Get in the Lawfirm Tent",
+    excerpt:
+      "KPMG, one of the Big Four accounting firms, has taken a significant step towards entering the US legal services market. On January 14, 2025, the Arizona Supreme Court\u2019s Committee on Alternative Business Structures unanimously recommended that KPMG Law US, a subsidiary of KPMG, be granted a license to operate as an alternative business structure (ABS) in Arizona.",
+    authorSlug: "anthony-biller",
+  },
+  {
+    slug: "understanding-nc-land-use-approvals",
+    tag: "Construction & Commercial",
+    date: "August 27, 2024",
+    title: "Understanding North Carolina Land Use Approvals",
+    excerpt:
+      "More than 500 counties and municipalities in North Carolina have adopted some sort of zoning and land use ordinance. In general terms, these ordinances have two broad functions.",
+    authorName: "Michael B. Kent, Jr.",
+  },
+  {
+    slug: "court-rules-covid-19-orders-violated-constitution",
+    tag: "Regulatory & Healthcare",
+    date: "May 5, 2024",
+    title: "Court Rules That COVID-19 Orders Violated Constitution",
+    excerpt:
+      "The North Carolina Court of Appeals recently issued an important decision addressing one of Governor Cooper\u2019s COVID-19 \u2018lockdown\u2019 orders. In North Carolina Bar & Tavern Association v. Cooper, the Court ruled that the order violated the North Carolina Constitution by allowing some businesses to reopen while forcing others to remain closed.",
+    authorName: "Michael B. Kent, Jr.",
+  },
+  {
+    slug: "short-term-rental-regulation-north-carolina",
+    tag: "Construction & Commercial",
+    date: "March 24, 2024",
+    title: "Short-Term Rental Regulation in North Carolina",
+    excerpt:
+      "As one of the most visited states in America, North Carolina has seen a surge in short-term rentals (think Airbnb or Vrbo). This growing sector of the economy has brought both opportunities and challenges.",
+    authorName: "Michael B. Kent, Jr.",
+  },
+  {
+    slug: "federal-court-upholds-property-rights",
+    tag: "Regulatory & Healthcare",
+    date: "February 17, 2024",
+    title: "Federal Court Upholds Property Rights Against Government Intrusion",
+    excerpt:
+      "Last month, a federal appeals court issued an important decision curbing the government\u2019s ability to use a criminal investigation of one party to search and seize property belonging to another. In Snitko v. United States, the Ninth Circuit Court of Appeals held that federal agents violated the constitutional rights of several hundred citizens when they opened and attempted to seize the contents of safe deposit boxes located at a raided facility.",
+    authorName: "Michael B. Kent, Jr.",
+  },
+  {
+    slug: "corporate-transparency-act-goes-into-effect",
+    tag: "Construction & Commercial",
+    date: "January 5, 2024",
+    title: "The Corporate Transparency Act Goes Into Effect",
+    excerpt:
+      "The Corporate Transparency Act (31 U.S.C. \u00A7 5336 and regulations at 31 C.F.R. 1010.380), goes into effect in January 2024 and may impact your small business by requiring you to report information about your business ownership to the federal government. Failure to comply with these reporting requirements could result in the imposition of civil and criminal penalties.",
+    authorSlug: "tara-seidel",
+  },
+  {
+    slug: "importance-of-recording-leases-options-real-estate",
+    tag: "Construction & Commercial",
+    date: "December 17, 2023",
+    title: "The Importance of Recording Leases, Options, and Other Interests in Real Estate",
+    excerpt:
+      "Do leases, options, and similar \u2018non-ownership\u2019 interests in real estate need to be recorded with the register of deeds? The North Carolina Court of Appeals addressed this issue earlier this year in Greaseoutlet.com, LLC v. MK South II, LLC.",
+    authorName: "Michael B. Kent, Jr.",
+  },
+  {
+    slug: "suit-challenging-covid-19-lockdown-orders",
+    tag: "Regulatory & Healthcare",
+    date: "September 16, 2023",
+    title: "Suit Challenging COVID-19 \u201CLockdown\u201D Orders Allowed to Continue",
+    excerpt:
+      "The North Carolina Court of Appeals this month addressed important issues concerning the scope of governmental emergency powers. In Howell v. Cooper, the Court held that the doctrine of \u2018sovereign immunity\u2019 did not bar a lawsuit challenging the constitutionality of Governor Cooper\u2019s COVID-19 \u2018lockdown\u2019 orders.",
+    authorName: "Michael B. Kent, Jr.",
+  },
+  {
+    slug: "envisage-attorneys-snag-prestigious-accolades",
+    tag: "Firm News",
+    date: "October 4, 2021",
+    title: "Envisage Attorneys Snag Several Prestigious Accolades",
+    excerpt:
+      "Tony has again been recognized in the exclusive ranks of The Best Lawyers in America for intellectual property litigation and patent law.",
+    authorName: "Envisage Law",
+  },
+  {
+    slug: "envisage-law-taps-former-hhs-fda-chief-counsel",
+    tag: "Firm News",
+    date: "May 10, 2021",
+    title: "Envisage Law Taps Former HHS Deputy General Counsel and FDA Chief Counsel to Lead Health Care and Life Sciences Practice",
+    excerpt:
+      "Envisage Law, a full-service business law firm, today announced the hire of James Lawrence to lead the firm\u2019s Health Care and Life Sciences Practice. Lawrence joins Envisage after serving as a Deputy General Counsel in the United States Department of Health and Human Services and as Chief Counsel of the Food and Drug Administration.",
+    authorName: "Envisage Law",
   },
 ];
 
