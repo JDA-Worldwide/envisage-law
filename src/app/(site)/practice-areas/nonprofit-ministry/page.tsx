@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function NonprofitPage() {
-  const banks = attorneys.find((a) => a.slug === "adam-banks")!;
+  const biller = attorneys.find((a) => a.slug === "anthony-biller")!;
 
   return (
     <>
@@ -45,10 +45,10 @@ export default function NonprofitPage() {
       <section className="border-t border-brand-border bg-brand-surface py-16 lg:py-20">
         <Container>
           <p className="mb-2 text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Anchoring Attorney</p>
-          <h2 className="mb-8 text-[clamp(28px,3.5vw,42px)] font-extrabold text-brand-primary">Led by Adam P. Banks</h2>
+          <h2 className="mb-8 text-[clamp(28px,3.5vw,42px)] font-extrabold text-brand-primary">Led by Anthony J. &ldquo;Tony&rdquo; Biller</h2>
           <AnchorAttorneyCard
-            attorney={banks}
-            description="Adam counsels nonprofits, religious organizations, and ministry boards, combining litigation experience with practical governance advice for mission-driven organizations."
+            attorney={biller}
+            description="Tony leads the firm's nonprofit and ministry practice, counseling religious organizations and ministry boards on disputes and the governance structures that prevent them."
           />
         </Container>
       </section>

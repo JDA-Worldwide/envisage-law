@@ -30,7 +30,7 @@ export default function HomePage() {
             <span className="text-brand-accent">cutting-edge strategy</span>
           </>
         }
-        subtitle="Our attorneys have secured favorable outcomes in federal courts nationwide, including multi-million-dollar judgments and precedent-setting appellate victories."
+        subtitle="Our attorneys have secured favorable outcomes in North Carolina and federal courts nationwide, including multi-million-dollar judgments and precedent-setting appellate victories."
         actions={[
           { label: "Contact Us", href: "/contact", variant: "teal" },
           { label: "Our Practice Areas", href: "/practice-areas", variant: "ghost" },
