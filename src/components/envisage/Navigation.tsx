@@ -203,6 +203,14 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
           open ? "visible translate-y-0 opacity-100" : "invisible translate-y-2 opacity-0"
         )}
       >
+        <Link
+          href={item.href}
+          role="menuitem"
+          className="mb-1 block rounded border-b border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
+          onClick={() => setOpen(false)}
+        >
+          All Practice Areas
+        </Link>
         <div className="grid grid-cols-2 gap-x-1">
           {item.children?.map((child) => (
             <Link
