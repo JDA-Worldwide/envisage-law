@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, useSyncExternalStore } from "react";
 import Link from "next/link";
 import AttorneyCard from "./AttorneyCard";
 import { ArrowIcon } from "./Icons";
@@ -10,49 +10,49 @@ interface AttorneyCarouselProps {
   attorneys: Attorney[];
 }
 
+function getCardsPerView() {
+  const w = window.innerWidth;
+  if (w < 640) return 1;
+  if (w < 1024) return 3;
+  return 4;
+}
+
+function subscribeToResize(callback: () => void) {
+  window.addEventListener("resize", callback);
+  return () => window.removeEventListener("resize", callback);
+}
+
 export default function AttorneyCarousel({ attorneys }: AttorneyCarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [cardsPerView, setCardsPerView] = useState(4);
 
+  const cardsPerView = useSyncExternalStore(subscribeToResize, getCardsPerView, () => 4);
   const totalPages = Math.ceil(attorneys.length / cardsPerView);
 
-  const getCardsPerView = useCallback(() => {
-    const w = window.innerWidth;
-    if (w < 640) return 1;
-    if (w < 1024) return 3;
-    return 4;
-  }, []);
-
-  const checkScroll = useCallback(() => {
+  const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 2);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 2);
 
-    const cpv = getCardsPerView();
-    setCardsPerView(cpv);
-
-    // Calculate active page from scroll position
     const cardWidth = el.scrollWidth / attorneys.length;
     const currentCard = Math.round(el.scrollLeft / cardWidth);
-    setActiveIndex(Math.min(Math.floor(currentCard / cpv), totalPages - 1));
-  }, [attorneys.length, getCardsPerView, totalPages]);
+    setActiveIndex(Math.min(Math.floor(currentCard / cardsPerView), totalPages - 1));
+  }, [attorneys.length, cardsPerView, totalPages]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    setCardsPerView(getCardsPerView());
-    checkScroll();
-    el.addEventListener("scroll", checkScroll, { passive: true });
-    window.addEventListener("resize", checkScroll);
+
+    const frameId = requestAnimationFrame(updateScrollState);
+    el.addEventListener("scroll", updateScrollState, { passive: true });
     return () => {
-      el.removeEventListener("scroll", checkScroll);
-      window.removeEventListener("resize", checkScroll);
+      cancelAnimationFrame(frameId);
+      el.removeEventListener("scroll", updateScrollState);
     };
-  }, [checkScroll, getCardsPerView]);
+  }, [updateScrollState]);
 
   const scroll = (direction: "left" | "right") => {
     const el = scrollRef.current;
