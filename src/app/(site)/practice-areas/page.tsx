@@ -29,13 +29,7 @@ export default function PracticeAreasPage() {
             Litigation-First by Design
           </p>
           <p className="text-[clamp(20px,2.4vw,27px)] font-light leading-[1.55] text-brand-primary">
-            Envisage is a civil and commercial litigation firm at its core. We handle routine commercial disputes in
-            contract, revenue, and shareholder matters, and we concentrate our deepest expertise in six niches.
-          </p>
-          <p className="mt-[22px] max-w-[720px] text-[19px] font-light leading-[1.65] text-brand-muted">
-            These areas are not standalone categories; they are our sweet spots within business litigation. The following
-            practice areas represent where we go deep, while remaining a litigation-first partner referring attorneys can
-            trust with niche matters.
+            Envisage handles civil disputes and complex matters. From complex patent infringement to routine breach of contract, we are comfortable helping our clients solve problems. We have six niches in which we particularly enjoy serving our clients.
           </p>
         </Container>
       </section>
@@ -61,14 +55,13 @@ export default function PracticeAreasPage() {
           <div className="flex gap-6 rounded-r-md border-l-4 border-brand-secondary bg-white p-8 pl-9">
             <ShieldCheckIcon className="mt-0.5 h-9 w-9 flex-none text-brand-secondary" />
             <div>
-              <h4 className="mb-2 text-lg font-bold text-brand-primary">A note for referring attorneys</h4>
+              <h4 className="mb-2 text-lg font-bold text-brand-primary">We&apos;re on your side</h4>
               <p className="text-[15px] leading-[1.65] text-brand-muted">
                 We strive to help clients avoid disputes; when they arise, we work to resolve them and keep clients out
-                of court. When clients must litigate, we know how to fight and win across state and federal trial and
-                appellate courts and arbitral proceedings throughout North Carolina and the United States. Envisage
+                of court. When clients must litigate, we know how to fight and win across state, federal trial, administrative,
+                appellate and arbitral proceedings throughout North Carolina and the United States. Envisage
                 litigators are admitted across federal and state courts in NC and federal jurisdictions nationwide,
                 including the Trademark Trial and Appeal Board, federal Courts of Appeal, and the U.S. Supreme Court.
-                We take niche matters and refer them back. We will not absorb your client.
               </p>
             </div>
           </div>
@@ -83,7 +76,7 @@ export default function PracticeAreasPage() {
         subtitle="Direct pathways only. Reach an attorney by phone or email."
         actions={[
           { label: "Contact Us", href: "/contact", variant: "teal" },
-          { label: "Meet the Attorneys", href: "/attorneys", variant: "ghost" },
+          { label: "Meet the Legal Team", href: "/legal-team", variant: "ghost" },
         ]}
       />
     </>

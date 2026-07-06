@@ -98,7 +98,7 @@ export default function IpTechnologyPage() {
           <AnchorAttorneyCard
             attorney={biller}
             roleLabel="Partner · NC Board Certified Specialist, Trademark Law"
-            description="Tony has litigated hundreds of commercial disputes in federal and state trial and appellate courts nationwide, and helps clients select, screen, register and manage trademarks and portfolios worldwide. The North Carolina State Bar recognizes him as a certified trademark specialist."
+            description="Tony has litigated hundreds of commercial disputes in federal and state trial courts and appellate courts nationwide, and helps clients select, screen, register and manage trademarks and portfolios worldwide. The North Carolina State Bar recognizes him as a certified trademark specialist."
           />
         </Container>
       </section>

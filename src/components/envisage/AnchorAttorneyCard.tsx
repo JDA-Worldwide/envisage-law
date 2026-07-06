@@ -17,8 +17,8 @@ export default function AnchorAttorneyCard({
   linkHref,
   linkLabel = "View full profile",
 }: AnchorAttorneyCardProps) {
-  const href = linkHref || (attorney.hasProfile ? attorney.href : "/attorneys");
-  const label = linkHref ? linkLabel : attorney.hasProfile ? linkLabel : "View attorneys";
+  const href = linkHref || (attorney.hasProfile ? attorney.href : "/legal-team");
+  const label = linkHref ? linkLabel : attorney.hasProfile ? linkLabel : "View legal team";
 
   return (
     <div className="mx-auto max-w-[960px] rounded-lg border border-brand-border bg-white p-7 shadow-sm">

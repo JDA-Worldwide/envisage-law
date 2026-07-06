@@ -23,6 +23,18 @@ function AnimatedStat({ stat }: { stat: Stat }) {
   const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
+  function animateCount(target: number, duration: number) {
+    const start = performance.now();
+    function tick(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -40,18 +52,6 @@ function AnimatedStat({ stat }: { stat: Stat }) {
     observer.observe(el);
     return () => observer.disconnect();
   }, [stat.number, hasAnimated]);
-
-  function animateCount(target: number, duration: number) {
-    const start = performance.now();
-    function tick(now: number) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(eased * target));
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
 
   const displayValue = `${stat.prefix ?? ""}${count.toLocaleString()}${stat.suffix ?? ""}`;
   const finalValue = `${stat.prefix ?? ""}${stat.number.toLocaleString()}${stat.suffix ?? ""}`;

@@ -52,7 +52,7 @@ export const attorneys: Attorney[] = [
     role: "Partner",
     niche: "IP & Technology",
     hasProfile: true,
-    href: "/attorneys/anthony-biller",
+    href: "/legal-team/anthony-biller",
     photo: "https://envisage.law/wp-content/uploads/2022/08/Anthony-Biller-530-x-548.png",
   },
   {
@@ -61,7 +61,7 @@ export const attorneys: Attorney[] = [
     role: "Partner",
     niche: "Regulatory & Healthcare",
     hasProfile: true,
-    href: "/attorneys/james-lawrence",
+    href: "/legal-team/james-lawrence",
     photo: "https://envisage.law/wp-content/uploads/2021/04/james-lawrence-210408-530-548.jpg",
   },
   {
@@ -70,7 +70,7 @@ export const attorneys: Attorney[] = [
     role: "Partner",
     niche: "Construction · Nonprofit · HOA",
     hasProfile: false,
-    href: "/attorneys",
+    href: "/legal-team",
     photo: "https://envisage.law/wp-content/uploads/2021/04/adam-banks-61-210407-530-548.jpg",
   },
   {
@@ -79,7 +79,7 @@ export const attorneys: Attorney[] = [
     role: "Attorney",
     niche: "Data Privacy & Security",
     hasProfile: false,
-    href: "/attorneys",
+    href: "/legal-team",
     photo: "https://envisage.law/wp-content/uploads/2021/10/Allison-Joelle-Harvill-Attorney-530-x-548.jpg",
   },
   {
@@ -88,7 +88,7 @@ export const attorneys: Attorney[] = [
     role: "Attorney",
     niche: "",
     hasProfile: false,
-    href: "/attorneys",
+    href: "/legal-team",
     photo: "https://envisage.law/wp-content/uploads/2022/09/Tara-Seidel-1.png",
   },
   {
@@ -97,7 +97,7 @@ export const attorneys: Attorney[] = [
     role: "Attorney",
     niche: "",
     hasProfile: false,
-    href: "/attorneys",
+    href: "/legal-team",
     photo: "https://envisage.law/wp-content/uploads/2023/08/Danielle-Rose-530-x-548.png",
   },
   {
@@ -106,7 +106,7 @@ export const attorneys: Attorney[] = [
     role: "Associate Attorney",
     niche: "",
     hasProfile: false,
-    href: "/attorneys",
+    href: "/legal-team",
     photo: "https://envisage.law/wp-content/uploads/2024/10/Sophie-Vouvalis-Attorney-530-x-548.png",
   },
   {
@@ -115,7 +115,7 @@ export const attorneys: Attorney[] = [
     role: "Associate Attorney",
     niche: "",
     hasProfile: false,
-    href: "/attorneys",
+    href: "/legal-team",
     photo: "https://envisage.law/wp-content/uploads/2024/10/Joy-Thomas-Envisage-Law-530-x-548.png",
   },
 ];
@@ -152,7 +152,7 @@ export const practices: PracticeArea[] = [
     icon: "ip",
     soon: false,
     standfirst:
-      "Protecting identities, content, ideas, and secrets. Trademark portfolios, patents, copyright, and trade secrets, managed worldwide.",
+      "We are comfortable in the technology trenches - such as helping clients with technology development contracts and litigating software disputes.",
   },
   {
     slug: "regulatory-healthcare",
@@ -179,7 +179,7 @@ export const practices: PracticeArea[] = [
     icon: "nonprofit",
     soon: false,
     standfirst:
-      "Counsel for nonprofits, religious organizations and ministry boards on disputes and governance.",
+      "Counsel for nonprofits, religious organizations and churches on disputes and governance.",
   },
   {
     slug: "hoa-community",
@@ -371,6 +371,6 @@ export const NAV_ITEMS = [
       description: p.standfirst.split(".")[0],
     })),
   },
-  { label: "Attorneys", href: "/attorneys" },
+  { label: "Legal Team", href: "/legal-team" },
   { label: "Insights", href: "/insights" },
 ];

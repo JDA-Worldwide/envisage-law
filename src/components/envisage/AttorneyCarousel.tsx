@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, useSyncExternalStore } from "react";
 import Link from "next/link";
 import AttorneyCard from "./AttorneyCard";
 import { ArrowIcon } from "./Icons";
@@ -10,49 +10,49 @@ interface AttorneyCarouselProps {
   attorneys: Attorney[];
 }
 
+function getCardsPerView() {
+  const w = window.innerWidth;
+  if (w < 640) return 1;
+  if (w < 1024) return 3;
+  return 4;
+}
+
+function subscribeToResize(callback: () => void) {
+  window.addEventListener("resize", callback);
+  return () => window.removeEventListener("resize", callback);
+}
+
 export default function AttorneyCarousel({ attorneys }: AttorneyCarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [cardsPerView, setCardsPerView] = useState(4);
 
+  const cardsPerView = useSyncExternalStore(subscribeToResize, getCardsPerView, () => 4);
   const totalPages = Math.ceil(attorneys.length / cardsPerView);
 
-  const getCardsPerView = useCallback(() => {
-    const w = window.innerWidth;
-    if (w < 640) return 1;
-    if (w < 1024) return 3;
-    return 4;
-  }, []);
-
-  const checkScroll = useCallback(() => {
+  const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 2);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 2);
 
-    const cpv = getCardsPerView();
-    setCardsPerView(cpv);
-
-    // Calculate active page from scroll position
     const cardWidth = el.scrollWidth / attorneys.length;
     const currentCard = Math.round(el.scrollLeft / cardWidth);
-    setActiveIndex(Math.min(Math.floor(currentCard / cpv), totalPages - 1));
-  }, [attorneys.length, getCardsPerView, totalPages]);
+    setActiveIndex(Math.min(Math.floor(currentCard / cardsPerView), totalPages - 1));
+  }, [attorneys.length, cardsPerView, totalPages]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    setCardsPerView(getCardsPerView());
-    checkScroll();
-    el.addEventListener("scroll", checkScroll, { passive: true });
-    window.addEventListener("resize", checkScroll);
+
+    const frameId = requestAnimationFrame(updateScrollState);
+    el.addEventListener("scroll", updateScrollState, { passive: true });
     return () => {
-      el.removeEventListener("scroll", checkScroll);
-      window.removeEventListener("resize", checkScroll);
+      cancelAnimationFrame(frameId);
+      el.removeEventListener("scroll", updateScrollState);
     };
-  }, [checkScroll, getCardsPerView]);
+  }, [updateScrollState]);
 
   const scroll = (direction: "left" | "right") => {
     const el = scrollRef.current;
@@ -77,14 +77,14 @@ export default function AttorneyCarousel({ attorneys }: AttorneyCarouselProps) {
       {/* Header */}
       <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
         <div>
-          <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Our Attorneys</p>
-          <h2 className="text-[clamp(30px,4vw,46px)] font-extrabold text-brand-primary">Meet our attorneys</h2>
+          <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Our Legal Team</p>
+          <h2 className="text-[clamp(30px,4vw,46px)] font-extrabold text-brand-primary">Meet our legal team</h2>
         </div>
         <Link
-          href="/attorneys"
+          href="/legal-team"
           className="inline-flex items-center gap-2.5 rounded-sm border-2 border-brand-primary bg-transparent px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-brand-primary transition-all hover:bg-brand-primary hover:text-white"
         >
-          All Attorneys <ArrowIcon />
+          Legal Team <ArrowIcon />
         </Link>
       </div>
 
