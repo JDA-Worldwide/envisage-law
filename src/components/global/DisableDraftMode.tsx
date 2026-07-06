@@ -6,19 +6,19 @@
  *
  * When the site is loaded inside the Presentation tool's iframe, the Studio
  * controls Draft Mode — showing this button would be redundant and confusing,
- * so it is hidden via `useDraftModeEnvironment`.
+ * so it is hidden via `useIsPresentationTool`.
  *
  * This component is only mounted when Draft Mode is active (see root layout).
  */
 "use client";
 
-import { useDraftModeEnvironment } from "next-sanity/hooks";
+import { useIsPresentationTool } from "next-sanity/hooks";
 
 export default function DisableDraftMode() {
-  const environment = useDraftModeEnvironment();
+  const isPresentationTool = useIsPresentationTool();
 
   // Inside the Presentation tool, the Studio manages Draft Mode
-  if (environment !== "live" && environment !== "unknown") return null;
+  if (isPresentationTool) return null;
 
   return (
     <a
