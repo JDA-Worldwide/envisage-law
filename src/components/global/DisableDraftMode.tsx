@@ -21,7 +21,6 @@ export default function DisableDraftMode() {
   if (environment !== "live" && environment !== "unknown") return null;
 
   return (
-    // eslint-disable-next-line @next/next/no-html-link-for-pages -- intentional full navigation to API route (not a page)
     <a
       href="/api/draft-mode/disable"
       className="fixed bottom-4 right-4 z-50 rounded-full bg-brand-primary px-4 py-2 text-sm font-medium text-white shadow-lg transition-opacity hover:opacity-90"

@@ -8,9 +8,16 @@ import { cn } from "@/lib/utils";
 import { LOGO_URL, NAV_ITEMS } from "@/lib/data";
 
 export default function Navigation() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuPathname, setMenuPathname] = useState(pathname);
   const toggleRef = useRef<HTMLButtonElement>(null);
+
+  // Close mobile menu when navigating (reset state during render, not in an effect)
+  if (menuPathname !== pathname) {
+    setMenuPathname(pathname);
+    setMobileOpen(false);
+  }
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -23,11 +30,6 @@ export default function Navigation() {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [mobileOpen]);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-40 flex h-[var(--header-height)] items-center border-b border-white/[0.08] bg-brand-primary">
