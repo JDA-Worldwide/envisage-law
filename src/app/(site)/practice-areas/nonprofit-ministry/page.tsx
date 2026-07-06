@@ -8,7 +8,7 @@ import { attorneys, STOCK_IMAGES, PHONE } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Nonprofit & Ministry",
   description:
-    "Counsel for nonprofits, religious organizations, and ministry boards on disputes and the governance structures that prevent them.",
+    "Counsel for nonprofits, religious organizations, and churches on disputes and the governance structures that prevent them.",
 };
 
 export default function NonprofitPage() {
@@ -19,7 +19,7 @@ export default function NonprofitPage() {
       <Hero
         backgroundImage={STOCK_IMAGES.courthouse}
         title="Nonprofit & Ministry"
-        subtitle="Counsel for nonprofits, religious organizations, and ministry boards on disputes and governance."
+        subtitle="Counsel for nonprofits, religious organizations, and churches on disputes and governance."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Practice Areas", href: "/practice-areas" },
@@ -30,10 +30,6 @@ export default function NonprofitPage() {
       <section className="py-16 lg:py-20">
         <Container className="max-w-[880px]">
           <p className="mb-4 text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Positioning</p>
-          <p className="text-[clamp(19px,2.2vw,25px)] font-light leading-[1.6] text-brand-primary">
-            We counsel nonprofits, religious organizations, and ministry boards on disputes and the governance structures
-            that prevent them.
-          </p>
           <p className="mt-5 text-[16px] leading-[1.7] text-brand-muted">
             Fiduciary duties, conflict policies, and the practical questions mission-driven organizations face are at the
             center of our work. We help boards navigate internal disputes, regulatory compliance, and the litigation that
@@ -48,7 +44,7 @@ export default function NonprofitPage() {
           <h2 className="mb-8 text-[clamp(28px,3.5vw,42px)] font-extrabold text-brand-primary">Led by Anthony J. &ldquo;Tony&rdquo; Biller</h2>
           <AnchorAttorneyCard
             attorney={biller}
-            description="Tony leads the firm's nonprofit and ministry practice, counseling religious organizations and ministry boards on disputes and the governance structures that prevent them."
+            description="Tony leads the firm's nonprofit and ministry practice, counseling religious organizations and churches on disputes and the governance structures that prevent them."
           />
         </Container>
       </section>

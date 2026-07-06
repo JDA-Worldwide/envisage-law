@@ -142,11 +142,11 @@ export default function HomePage() {
               },
               {
                 title: "Board-Certified Expertise",
-                text: "Anthony Biller is one of only a select few Board Certified Specialists in Trademark Law. Our team brings rare specialization to complex IP and technology disputes, and our attorneys are recognized as The Best Lawyers in America and have achieved Super Lawyers status.",
+                text: "Anthony Biller is one of a select few Board Certified Specialists in Trademark Law. Our team brings rare specialization to complex IP and technology disputes, and our attorneys are recognized as The Best Lawyers in America and have achieved Super Lawyers status.",
               },
               {
                 title: "Technology-Driven Advantage",
-                text: "We leverage cutting-edge technologies, advanced legal research platforms, and proprietary case management systems to deliver strategic advantages our competitors cannot match.",
+                text: "We are not afraid of technology, whether tech centered disputes or transactions or using it for our clients. We leverage cutting-edge technologies, advanced legal research platforms, and proprietary case management systems to deliver strategic advantages while also striving to deliver greater value to our clients.",
               },
             ].map((item) => (
               <div key={item.title}>
@@ -199,7 +199,7 @@ export default function HomePage() {
         backgroundImage={STOCK_IMAGES.consultation}
         eyebrow="Litigation-First · Niche by Design"
         title="When clients must litigate, we know how to fight and win."
-        subtitle="We are passionate, unrelenting, and experienced in state and federal trial and appellate courts and arbitral proceedings throughout North Carolina and the United States."
+        subtitle="We are passionate, unrelenting, and experienced in state and federal trial, administrative, appellate and arbitral proceedings throughout North Carolina and the United States."
         actions={[
           { label: "Contact Us", href: "/contact", variant: "teal" },
           { label: "About the Firm", href: "/about", variant: "ghost" },

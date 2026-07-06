@@ -22,7 +22,7 @@ export default function BillerProfilePage() {
           <nav className="flex items-center gap-2.5 text-[13px] font-semibold uppercase tracking-[0.04em] text-white/60" aria-label="Breadcrumb">
             <Link href="/" className="text-[#6fb0c2] hover:text-white">Home</Link>
             <span className="opacity-50">/</span>
-            <Link href="/attorneys" className="text-[#6fb0c2] hover:text-white">Attorneys</Link>
+            <Link href="/legal-team" className="text-[#6fb0c2] hover:text-white">Legal Team</Link>
             <span className="opacity-50">/</span>
             <span>Anthony J. Biller</span>
           </nav>
@@ -148,8 +148,8 @@ export default function BillerProfilePage() {
                 <a href="mailto:ajbiller@envisage.law" className="inline-flex items-center rounded-sm bg-brand-primary px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:bg-[#032a5c]">
                   Email Tony
                 </a>
-                <Link href="/attorneys" className="inline-flex items-center rounded-sm border-2 border-brand-primary bg-transparent px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-brand-primary transition-all hover:bg-brand-primary hover:text-white">
-                  All Attorneys
+                <Link href="/legal-team" className="inline-flex items-center rounded-sm border-2 border-brand-primary bg-transparent px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-brand-primary transition-all hover:bg-brand-primary hover:text-white">
+                  Legal Team
                 </Link>
               </div>
             </div>

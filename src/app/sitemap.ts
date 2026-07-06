@@ -14,9 +14,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/practice-areas/nonprofit-ministry", priority: 0.8 },
     { path: "/practice-areas/hoa-community", priority: 0.8 },
     { path: "/practice-areas/data-privacy", priority: 0.8 },
-    { path: "/attorneys", priority: 0.8 },
-    { path: "/attorneys/anthony-biller", priority: 0.7 },
-    { path: "/attorneys/james-lawrence", priority: 0.7 },
+    { path: "/legal-team", priority: 0.8 },
+    { path: "/legal-team/anthony-biller", priority: 0.7 },
+    { path: "/legal-team/james-lawrence", priority: 0.7 },
     { path: "/insights", priority: 0.7 },
     { path: "/contact", priority: 0.8 },
   ];

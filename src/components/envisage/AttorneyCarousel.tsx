@@ -77,14 +77,14 @@ export default function AttorneyCarousel({ attorneys }: AttorneyCarouselProps) {
       {/* Header */}
       <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
         <div>
-          <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Our Attorneys</p>
-          <h2 className="text-[clamp(30px,4vw,46px)] font-extrabold text-brand-primary">Meet our attorneys</h2>
+          <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Our Legal Team</p>
+          <h2 className="text-[clamp(30px,4vw,46px)] font-extrabold text-brand-primary">Meet our legal team</h2>
         </div>
         <Link
-          href="/attorneys"
+          href="/legal-team"
           className="inline-flex items-center gap-2.5 rounded-sm border-2 border-brand-primary bg-transparent px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-brand-primary transition-all hover:bg-brand-primary hover:text-white"
         >
-          All Attorneys <ArrowIcon />
+          Legal Team <ArrowIcon />
         </Link>
       </div>
 

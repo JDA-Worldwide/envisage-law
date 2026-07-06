@@ -159,8 +159,8 @@ export default function AboutPage() {
           <div className="grid gap-11 lg:grid-cols-3">
             {[
               { title: "Proven Excellence", text: "Multi-million dollar judgments, landmark appellate victories, and precedent-setting settlements across our practice. We defend First Amendment rights in groundbreaking social media litigation and enforce trademark rights for global brands." },
-              { title: "Board-Certified Expertise", text: "Anthony Biller is one of only a select few Board Certified Specialists in Trademark Law. Our attorneys are recognized as The Best Lawyers in America and have achieved Super Lawyers status." },
-              { title: "Technology-Driven Advantage", text: "We leverage cutting-edge technologies, advanced legal research platforms, and proprietary case management systems to deliver strategic advantages our competitors cannot match." },
+              { title: "Board-Certified Expertise", text: "Anthony Biller is one of a select few Board Certified Specialists in Trademark Law. Our attorneys are recognized as The Best Lawyers in America and have achieved Super Lawyers status." },
+              { title: "Technology-Driven Advantage", text: "We are not afraid of technology, whether tech centered disputes or transactions or using it for our clients. We leverage cutting-edge technologies, advanced legal research platforms, and proprietary case management systems to deliver strategic advantages while also striving to deliver greater value to our clients." },
             ].map((item) => (
               <div key={item.title} className="border-t-2 border-brand-border pt-[22px]">
                 <h3 className="mb-3.5 flex items-start gap-3 text-[21px] font-extrabold text-brand-primary">
@@ -181,7 +181,7 @@ export default function AboutPage() {
         title="Service is our calling."
         actions={[
           { label: "Contact Us", href: "/contact", variant: "teal" },
-          { label: "Meet the Team", href: "/attorneys", variant: "ghost" },
+          { label: "Meet the Team", href: "/legal-team", variant: "ghost" },
         ]}
       />
     </>

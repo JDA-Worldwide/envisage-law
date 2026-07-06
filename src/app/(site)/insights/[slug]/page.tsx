@@ -34,7 +34,7 @@ export default async function ArticlePage({ params }: Props) {
   const authorName = author?.name ?? article?.authorName ?? "Envisage Law";
   const authorRole = author?.role ?? "";
   const authorPhoto = author?.photo ?? null;
-  const authorHref = author?.href ?? "/attorneys";
+  const authorHref = author?.href ?? "/legal-team";
   const body = article ? articleContent[article.slug] : null;
 
   if (!article) {
