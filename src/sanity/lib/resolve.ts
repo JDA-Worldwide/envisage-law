@@ -10,8 +10,16 @@ export const mainDocuments = defineDocuments([
     filter: `_type == "page" && slug.current == $slug`,
   },
   {
-    route: "/blog/:slug",
-    filter: `_type == "blogPost" && slug.current == $slug`,
+    route: "/legal-team/:slug",
+    filter: `_type == "attorney" && slug.current == $slug`,
+  },
+  {
+    route: "/practice-areas/:slug",
+    filter: `_type == "practiceArea" && slug.current == $slug`,
+  },
+  {
+    route: "/insights/:slug",
+    filter: `_type == "insight" && slug.current == $slug`,
   },
 ]);
 
@@ -27,17 +35,44 @@ export const locations = {
       ],
     }),
   }),
-  blogPost: defineLocations({
+  attorney: defineLocations({
+    select: { title: "name", slug: "slug.current" },
+    resolve: (doc) => ({
+      locations: [
+        {
+          title: doc?.title || "Untitled",
+          href: `/legal-team/${doc?.slug}`,
+        },
+        { title: "Legal Team", href: "/legal-team" },
+      ],
+    }),
+  }),
+  practiceArea: defineLocations({
     select: { title: "title", slug: "slug.current" },
     resolve: (doc) => ({
       locations: [
         {
           title: doc?.title || "Untitled",
-          href: `/blog/${doc?.slug}`,
+          href: `/practice-areas/${doc?.slug}`,
         },
-        { title: "Blog", href: "/blog" },
+        { title: "Practice Areas", href: "/practice-areas" },
       ],
     }),
+  }),
+  insight: defineLocations({
+    select: { title: "title", slug: "slug.current" },
+    resolve: (doc) => ({
+      locations: [
+        {
+          title: doc?.title || "Untitled",
+          href: `/insights/${doc?.slug}`,
+        },
+        { title: "Insights", href: "/insights" },
+      ],
+    }),
+  }),
+  staffMember: defineLocations({
+    locations: [{ title: "Legal Team", href: "/legal-team" }],
   }),
   globalSettings: defineLocations({
     message: "This document is used on all pages",
@@ -50,8 +85,5 @@ export const locations = {
   footer: defineLocations({
     message: "This document is used on all pages",
     tone: "caution",
-  }),
-  teamMember: defineLocations({
-    locations: [{ title: "Team page", href: "/team" }],
   }),
 };

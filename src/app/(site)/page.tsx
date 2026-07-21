@@ -7,8 +7,15 @@ import AttorneyCarousel from "@/components/envisage/AttorneyCarousel";
 import ArticleCard from "@/components/envisage/ArticleCard";
 import RecognitionCard from "@/components/envisage/RecognitionCard";
 import CtaBand from "@/components/envisage/CtaBand";
-import { practices, attorneys, articles, STOCK_IMAGES } from "@/lib/data";
+import { getSiteImages } from "@/lib/siteImages";
 import { ArrowIcon } from "@/components/envisage/Icons";
+import { sanityFetch } from "@/sanity/lib/live";
+import {
+  allPracticeAreasQuery,
+  allAttorneysQuery,
+  allInsightsQuery,
+} from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
   title: "Envisage Law · Complex Litigation · Strategic Counsel · TechLaw",
@@ -16,13 +23,48 @@ export const metadata: Metadata = {
     "Envisage Law is a litigation-first boutique firm in Raleigh, NC, representing clients in high-stakes business and intellectual property litigation nationwide.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [{ data: practiceAreas }, { data: attorneys }, { data: insights }, images] =
+    await Promise.all([
+      sanityFetch({ query: allPracticeAreasQuery }),
+      sanityFetch({ query: allAttorneysQuery }),
+      sanityFetch({ query: allInsightsQuery }),
+      getSiteImages(),
+    ]);
+
+  // Map Sanity attorneys to the shape AttorneyCarousel/AttorneyCard expects
+  const mappedAttorneys = (attorneys ?? []).map(
+    (a: { _id: string; slug: string; name: string; role: string; niche?: string; photo?: { asset: { _ref: string } }; email?: string }) => ({
+      slug: a.slug,
+      name: a.name,
+      role: a.role,
+      niche: a.niche ?? "",
+      hasProfile: true,
+      href: `/legal-team/${a.slug}`,
+      photo: a.photo ? urlFor(a.photo).width(530).height(548).url() : "",
+    })
+  );
+
+  // Map Sanity insights to the shape ArticleCard expects
+  const latestInsights = (insights ?? []).slice(0, 3).map(
+    (a: { _id: string; slug: string; category: string; title: string; excerpt?: string; publishedAt: string }) => ({
+      slug: a.slug,
+      tag: a.category,
+      title: a.title,
+      excerpt: a.excerpt ?? "",
+      date: new Date(a.publishedAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
+    })
+  );
 
   return (
     <>
       {/* Hero */}
       <Hero
-        backgroundImage={STOCK_IMAGES.heroParticles}
+        backgroundImage={images.heroParticles}
         eyebrow="Complex Litigation · Strategic Counsel · TechLaw"
         title={
           <>
@@ -72,8 +114,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {practices.map((p) => (
-              <PracticeCard key={p.slug} practice={p} />
+            {(practiceAreas ?? []).map((p: { _id: string; slug: string; title: string; icon?: string; standfirst: string }) => (
+              <PracticeCard key={p._id} practice={p} />
             ))}
           </div>
         </Container>
@@ -122,7 +164,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden py-section">
         <div
           className="absolute inset-0 z-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${STOCK_IMAGES.courthouse}')` }}
+          style={{ backgroundImage: `url('${images.courthouse}')` }}
         />
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[rgba(0,31,70,0.93)] to-[rgba(0,31,70,0.9)]" />
         <Container className="relative z-[2]">
@@ -164,7 +206,7 @@ export default function HomePage() {
       {/* Featured Attorneys */}
       <section className="bg-brand-surface py-section">
         <Container>
-          <AttorneyCarousel attorneys={attorneys} />
+          <AttorneyCarousel attorneys={mappedAttorneys} />
         </Container>
       </section>
 
@@ -187,7 +229,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid gap-[26px] sm:grid-cols-2 lg:grid-cols-3">
-            {articles.slice(0, 3).map((a) => (
+            {latestInsights.map((a: { slug: string; tag: string; title: string; excerpt: string; date: string }) => (
               <ArticleCard key={a.slug} article={a} />
             ))}
           </div>
@@ -196,7 +238,7 @@ export default function HomePage() {
 
       {/* Contact CTA Band */}
       <CtaBand
-        backgroundImage={STOCK_IMAGES.consultation}
+        backgroundImage={images.consultation}
         eyebrow="Litigation-First · Niche by Design"
         title="When clients must litigate, we know how to fight and win."
         subtitle="We are passionate, unrelenting, and experienced in state and federal trial, administrative, appellate and arbitral proceedings throughout North Carolina and the United States."

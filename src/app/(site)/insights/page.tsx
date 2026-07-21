@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Hero from "@/components/envisage/Hero";
-import { STOCK_IMAGES } from "@/lib/data";
+import { getSiteImages } from "@/lib/siteImages";
+import { sanityFetch } from "@/sanity/lib/live";
+import { allInsightsQuery } from "@/sanity/lib/queries";
 import InsightsIndex from "./InsightsIndex";
 
 export const metadata: Metadata = {
@@ -10,11 +12,14 @@ export const metadata: Metadata = {
     "Commentary and analysis from Envisage Law attorneys across IP, regulatory, healthcare, construction, nonprofit, HOA, and data privacy matters.",
 };
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
+  const { data: insights } = await sanityFetch({ query: allInsightsQuery });
+  const images = await getSiteImages();
+
   return (
     <>
       <Hero
-        backgroundImage={STOCK_IMAGES.heroParticles}
+        backgroundImage={images.heroParticles}
         title="Insights"
         subtitle="Commentary and analysis from our attorneys across the firm's six niches."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Insights" }]}
@@ -22,7 +27,7 @@ export default function InsightsPage() {
 
       <section className="py-section">
         <Container>
-          <InsightsIndex />
+          <InsightsIndex insights={insights ?? []} />
         </Container>
       </section>
 

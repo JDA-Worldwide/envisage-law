@@ -13,6 +13,11 @@ import Testimonials from "./modules/Testimonials";
 import FAQ from "./modules/FAQ";
 import TeamGrid from "./modules/TeamGrid";
 import ContactForm from "./modules/ContactForm";
+import AttorneyGrid from "./modules/AttorneyGrid";
+import PracticeAreaGrid from "./modules/PracticeAreaGrid";
+import AnchoringAttorneyBand from "./modules/AnchoringAttorneyBand";
+import ContactMethods from "./modules/ContactMethods";
+import CtaBand from "./modules/CtaBand";
 import { JsonLd, faqPageSchema } from "@/lib/jsonLd";
 import { toPlainText, type PortableTextBlock } from "@portabletext/react";
 
@@ -46,6 +51,11 @@ const moduleMap: Record<string, ComponentType<any>> = {
   faq: FAQ,
   teamGrid: TeamGrid,
   contactForm: ContactForm,
+  attorneyGrid: AttorneyGrid,
+  practiceAreaGrid: PracticeAreaGrid,
+  anchoringAttorneyBand: AnchoringAttorneyBand,
+  contactMethods: ContactMethods,
+  ctaBand: CtaBand,
 };
 
 // Full-bleed modules render edge-to-edge with no section padding wrapper.

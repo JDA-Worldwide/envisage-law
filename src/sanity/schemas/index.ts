@@ -3,7 +3,10 @@ import type { SchemaTypeDefinition } from "sanity";
 // Documents
 import globalSettings from "./documents/globalSettings";
 import page from "./documents/page";
-import blogPost from "./documents/blogPost";
+import insight from "./documents/blogPost";
+import attorney from "./documents/attorney";
+import staffMember from "./documents/staffMember";
+import practiceArea from "./documents/practiceArea";
 import teamMember from "./documents/teamMember";
 import navigation from "./documents/navigation";
 import footer from "./documents/footer";
@@ -26,12 +29,20 @@ import teamGrid from "./objects/teamGrid";
 import contactForm from "./objects/contactForm";
 import ctaButton from "./objects/ctaButton";
 import pageBuilder from "./objects/pageBuilder";
+import attorneyGrid from "./objects/attorneyGrid";
+import practiceAreaGrid from "./objects/practiceAreaGrid";
+import anchoringAttorneyBand from "./objects/anchoringAttorneyBand";
+import contactMethods from "./objects/contactMethods";
+import ctaBand from "./objects/ctaBand";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Documents
   globalSettings,
   page,
-  blogPost,
+  insight,
+  attorney,
+  staffMember,
+  practiceArea,
   teamMember,
   navigation,
   footer,
@@ -54,4 +65,9 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   contactForm,
   ctaButton,
   pageBuilder,
+  attorneyGrid,
+  practiceAreaGrid,
+  anchoringAttorneyBand,
+  contactMethods,
+  ctaBand,
 ];

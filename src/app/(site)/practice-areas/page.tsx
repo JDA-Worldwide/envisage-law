@@ -4,7 +4,9 @@ import Hero from "@/components/envisage/Hero";
 import PracticeCard from "@/components/envisage/PracticeCard";
 import CtaBand from "@/components/envisage/CtaBand";
 import { ShieldCheckIcon } from "@/components/envisage/Icons";
-import { practices, STOCK_IMAGES } from "@/lib/data";
+import { getSiteImages } from "@/lib/siteImages";
+import { sanityFetch } from "@/sanity/lib/live";
+import { allPracticeAreasQuery } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Practice Areas",
@@ -12,11 +14,16 @@ export const metadata: Metadata = {
     "A civil and commercial litigation firm at its core, with deepest expertise in six niches: IP & Technology, Regulatory & Healthcare, Construction, Nonprofit & Ministry, HOA, and Data Privacy.",
 };
 
-export default function PracticeAreasPage() {
+export default async function PracticeAreasPage() {
+  const { data: practiceAreas } = await sanityFetch({
+    query: allPracticeAreasQuery,
+  });
+  const images = await getSiteImages();
+
   return (
     <>
       <Hero
-        backgroundImage={STOCK_IMAGES.heroParticles}
+        backgroundImage={images.heroParticles}
         title="Practice Areas"
         subtitle="Six clearly delineated niches, the sweet spots where a litigation-first boutique goes deep."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Practice Areas" }]}
@@ -34,7 +41,7 @@ export default function PracticeAreasPage() {
         </Container>
       </section>
 
-      {/* Six Niche Cards */}
+      {/* Niche Cards */}
       <section style={{ paddingTop: 0, paddingBottom: "96px", background: "linear-gradient(#fff 80px, #F5F7FA 80px)" }}>
         <Container>
           <div className="mb-10 flex items-center gap-5">
@@ -42,8 +49,8 @@ export default function PracticeAreasPage() {
             <div className="h-px flex-1 bg-brand-border" />
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {practices.map((p) => (
-              <PracticeCard key={p.slug} practice={p} />
+            {(practiceAreas ?? []).map((p: { _id: string; slug: string; title: string; icon?: string; standfirst: string }) => (
+              <PracticeCard key={p._id} practice={p} />
             ))}
           </div>
         </Container>
@@ -70,7 +77,7 @@ export default function PracticeAreasPage() {
 
       {/* Contact CTA */}
       <CtaBand
-        backgroundImage={STOCK_IMAGES.consultation}
+        backgroundImage={images.consultation}
         eyebrow="Have a Matter in One of These Niches?"
         title="Let's talk about your case."
         subtitle="Direct pathways only. Reach an attorney by phone or email."

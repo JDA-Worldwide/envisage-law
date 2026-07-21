@@ -28,6 +28,14 @@ export const settingsQuery = groq`
     siteUrl,
     logo,
     defaultSeo,
+    phone,
+    phoneTel,
+    mailingAddress,
+    lawpayUrl,
+    heroImage,
+    courthouseImage,
+    consultationImage,
+    raleighSkylineImage,
     socialLinks[] {
       _key,
       platform,
@@ -98,6 +106,18 @@ export const pageBySlugQuery = groq`
           photo,
           bio
         }
+      },
+      _type == "anchoringAttorneyBand" => {
+        ...,
+        attorney-> {
+          _id,
+          name,
+          "slug": slug.current,
+          role,
+          photo,
+          email,
+          phone
+        }
       }
     }
   }
@@ -119,29 +139,151 @@ export const homepageQuery = groq`
           photo,
           bio
         }
+      },
+      _type == "anchoringAttorneyBand" => {
+        ...,
+        attorney-> {
+          _id,
+          name,
+          "slug": slug.current,
+          role,
+          photo,
+          email,
+          phone
+        }
       }
     }
   }
 `;
 
-// --- Blog ---
+// --- Attorneys ---
 
-export const allBlogPostsQuery = groq`
-  *[_type == "blogPost"] | order(publishedAt desc) {
-    title,
+export const allAttorneysQuery = groq`
+  *[_type == "attorney"] | order(order asc) {
+    _id,
+    name,
     "slug": slug.current,
-    excerpt,
-    publishedAt,
-    featuredImage
+    role,
+    niche,
+    photo,
+    email
   }
 `;
 
-export const blogPostBySlugQuery = groq`
-  *[_type == "blogPost" && slug.current == $slug][0] {
+export const attorneyBySlugQuery = groq`
+  *[_type == "attorney" && slug.current == $slug][0] {
+    _id,
+    name,
+    "slug": slug.current,
+    role,
+    niche,
+    photo,
+    email,
+    phone,
+    bio,
+    credentialTitle,
+    credentialSubtitle,
+    practiceAreaTags[] {
+      _key,
+      label,
+      "practiceAreaSlug": practiceAreaRef->slug.current
+    },
+    profileSections[] {
+      _key,
+      _type,
+      title,
+      items,
+      entries[] {
+        _key,
+        label,
+        value
+      }
+    },
+    seo
+  }
+`;
+
+// --- Staff ---
+
+export const allStaffQuery = groq`
+  *[_type == "staffMember"] | order(order asc) {
+    _id,
+    name,
+    role,
+    photo,
+    initials
+  }
+`;
+
+// --- Practice Areas ---
+
+export const allPracticeAreasQuery = groq`
+  *[_type == "practiceArea"] | order(order asc) {
+    _id,
     title,
     "slug": slug.current,
-    author,
+    icon,
+    standfirst
+  }
+`;
+
+export const practiceAreaBySlugQuery = groq`
+  *[_type == "practiceArea" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    icon,
+    standfirst,
+    heroSubtitle,
+    body,
+    capabilities,
+    featuredCapability,
+    anchoringAttorney-> {
+      _id,
+      name,
+      "slug": slug.current,
+      role,
+      photo,
+      email,
+      phone
+    },
+    anchoringHeading,
+    anchoringRoleLabel,
+    anchoringDescription,
+    ctaHeading,
+    seo
+  }
+`;
+
+// --- Insights ---
+
+export const allInsightsQuery = groq`
+  *[_type == "insight"] | order(publishedAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    excerpt,
     publishedAt,
+    featured,
+    featuredImage,
+    "authorName": coalesce(author->name, authorName),
+    "authorSlug": author->slug.current
+  }
+`;
+
+export const insightBySlugQuery = groq`
+  *[_type == "insight" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    "authorName": coalesce(author->name, authorName),
+    "authorSlug": author->slug.current,
+    "authorRole": author->role,
+    "authorPhoto": author->photo,
+    publishedAt,
+    featured,
     excerpt,
     body,
     featuredImage,

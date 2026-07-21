@@ -3,7 +3,7 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Hero from "@/components/envisage/Hero";
 import CtaBand from "@/components/envisage/CtaBand";
-import { STOCK_IMAGES } from "@/lib/data";
+import { getSiteImages } from "@/lib/siteImages";
 
 export const metadata: Metadata = {
   title: "About",
@@ -11,11 +11,13 @@ export const metadata: Metadata = {
     "Envisage Law: Relentless. Fierce. Undaunted. A litigation-first boutique of board-certified specialists and nationally recognized litigators who take on cases that define legal precedent.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const images = await getSiteImages();
+
   return (
     <>
       <Hero
-        backgroundImage={STOCK_IMAGES.heroParticles}
+        backgroundImage={images.heroParticles}
         title={<>Relentless. Fierce. <span className="text-brand-accent">Undaunted.</span></>}
         subtitle="Excellence is a choice. Service is our calling."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
@@ -51,7 +53,7 @@ export default function AboutPage() {
             </div>
             <div className="overflow-hidden rounded-lg shadow-md" style={{ aspectRatio: "4/3" }}>
               <Image
-                src={`${STOCK_IMAGES.consultation}&w=1400`}
+                src={`${images.consultation}&w=1400`}
                 alt="Two professionals shaking hands across a table"
                 width={700}
                 height={525}
@@ -68,7 +70,7 @@ export default function AboutPage() {
           <div className="grid items-center gap-16 lg:grid-cols-2">
             <div className="overflow-hidden rounded-lg shadow-md lg:order-first" style={{ aspectRatio: "4/3" }}>
               <Image
-                src={`${STOCK_IMAGES.heroParticles}&w=1400`}
+                src={`${images.heroParticles}&w=1400`}
                 alt="Abstract blue digital particle texture representing technology"
                 width={700}
                 height={525}
@@ -176,7 +178,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <CtaBand
-        backgroundImage={STOCK_IMAGES.consultation}
+        backgroundImage={images.consultation}
         eyebrow="Work With Us"
         title="Service is our calling."
         actions={[

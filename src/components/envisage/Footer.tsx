@@ -1,10 +1,31 @@
 import Link from "next/link";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
-import { LOGO_URL, PHONE, PHONE_TEL, practices } from "@/lib/data";
 
-export default function Footer() {
+interface Settings {
+  phone?: string;
+  phoneTel?: string;
+  mailingAddress?: string;
+}
+
+interface PracticeAreaItem {
+  _id: string;
+  title: string;
+  slug: string;
+}
+
+interface FooterProps {
+  settings?: Settings;
+  practiceAreas: PracticeAreaItem[];
+}
+
+const LOGO_URL = "/envisage-law-logo.svg";
+
+export default function Footer({ settings, practiceAreas }: FooterProps) {
   const year = new Date().getFullYear();
+  const phone = settings?.phone ?? "919.268.8998";
+  const phoneTel = settings?.phoneTel ?? "9192688998";
+  const address = settings?.mailingAddress ?? "Envisage Law\nPO Box 30099\nRaleigh, North Carolina 27622";
 
   return (
     <footer className="bg-[#2D3748] text-white/80">
@@ -47,9 +68,9 @@ export default function Footer() {
           <div>
             <h4 className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.1em] text-white">Practice Areas</h4>
             <ul className="flex flex-col gap-[11px]">
-              {practices.map((p) => (
-                <li key={p.slug}>
-                  <Link href={p.href} className="text-sm text-white/80 transition-colors hover:text-white">
+              {practiceAreas.map((p) => (
+                <li key={p._id}>
+                  <Link href={`/practice-areas/${p.slug}`} className="text-sm text-white/80 transition-colors hover:text-white">
                     {p.title}
                   </Link>
                 </li>
@@ -80,10 +101,11 @@ export default function Footer() {
           <div>
             <h4 className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.1em] text-white">Get in touch</h4>
             <p className="text-sm leading-[1.7] text-white/80">
-              Envisage Law<br />
-              PO Box 30099<br />
-              Raleigh, North Carolina 27622<br /><br />
-              <a href={PHONE_TEL} className="font-semibold text-[#8cc8d8] transition-colors hover:text-white">{PHONE}</a>
+              {address.split("\n").map((line, i) => (
+                <span key={i}>{line}<br /></span>
+              ))}
+              <br />
+              <a href={`tel:${phoneTel}`} className="font-semibold text-[#8cc8d8] transition-colors hover:text-white">{phone}</a>
             </p>
             <p className="mt-4 text-[13px] leading-[1.6] text-white/75">
               Attorneys conveniently located in Raleigh, NC · Asheville, NC · Columbia, TN.

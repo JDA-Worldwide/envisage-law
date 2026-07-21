@@ -1,6 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Attorney } from "@/lib/data";
+interface Attorney {
+  slug: string;
+  name: string;
+  role: string;
+  niche: string;
+  hasProfile: boolean;
+  href: string;
+  photo: string;
+}
 
 interface AttorneyCardProps {
   attorney: Attorney;

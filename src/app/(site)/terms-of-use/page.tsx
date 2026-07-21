@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Hero from "@/components/envisage/Hero";
-import { STOCK_IMAGES } from "@/lib/data";
+import { getSiteImages } from "@/lib/siteImages";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
   description: "Envisage Law terms of use.",
 };
 
-export default function TermsOfUsePage() {
+export default async function TermsOfUsePage() {
+  const images = await getSiteImages();
+
   return (
     <>
       <Hero
-        backgroundImage={STOCK_IMAGES.heroParticles}
+        backgroundImage={images.heroParticles}
         title="Terms of Use"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Terms of Use" }]}
       />

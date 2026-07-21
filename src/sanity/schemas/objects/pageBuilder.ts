@@ -17,5 +17,10 @@ export default defineType({
     defineArrayMember({ type: "faq" }),
     defineArrayMember({ type: "teamGrid" }),
     defineArrayMember({ type: "contactForm" }),
+    defineArrayMember({ type: "attorneyGrid" }),
+    defineArrayMember({ type: "practiceAreaGrid" }),
+    defineArrayMember({ type: "anchoringAttorneyBand" }),
+    defineArrayMember({ type: "contactMethods" }),
+    defineArrayMember({ type: "ctaBand" }),
   ],
 });

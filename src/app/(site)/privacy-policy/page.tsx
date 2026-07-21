@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Hero from "@/components/envisage/Hero";
-import { STOCK_IMAGES } from "@/lib/data";
+import { getSiteImages } from "@/lib/siteImages";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Envisage Law privacy policy.",
 };
 
-export default function PrivacyPolicyPage() {
+export default async function PrivacyPolicyPage() {
+  const images = await getSiteImages();
+
   return (
     <>
       <Hero
-        backgroundImage={STOCK_IMAGES.heroParticles}
+        backgroundImage={images.heroParticles}
         title="Privacy Policy"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Privacy Policy" }]}
       />

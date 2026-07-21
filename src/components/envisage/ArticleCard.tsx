@@ -1,7 +1,14 @@
 import Link from "next/link";
-import type { Article } from "@/lib/data";
 
-export default function ArticleCard({ article }: { article: Article }) {
+interface ArticleCardData {
+  slug: string;
+  tag: string;
+  title: string;
+  excerpt: string;
+  date: string;
+}
+
+export default function ArticleCard({ article }: { article: ArticleCardData }) {
   return (
     <Link
       href={`/insights/${article.slug}`}

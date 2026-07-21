@@ -5,9 +5,39 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LOGO_URL, NAV_ITEMS } from "@/lib/data";
 
-export default function Navigation() {
+interface NavItemData {
+  label: string;
+  href: string;
+  children?: { label: string; href: string; description?: string }[];
+}
+
+interface PracticeAreaItem {
+  _id: string;
+  title: string;
+  slug: string;
+}
+
+interface NavigationProps {
+  practiceAreas: PracticeAreaItem[];
+}
+
+const LOGO_URL = "/envisage-law-logo.svg";
+
+export default function Navigation({ practiceAreas }: NavigationProps) {
+  const NAV_ITEMS: NavItemData[] = [
+    { label: "About", href: "/about" },
+    {
+      label: "Practice Areas",
+      href: "/practice-areas",
+      children: practiceAreas.map((p) => ({
+        label: p.title,
+        href: `/practice-areas/${p.slug}`,
+      })),
+    },
+    { label: "Legal Team", href: "/legal-team" },
+    { label: "Insights", href: "/insights" },
+  ];
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuPathname, setMenuPathname] = useState(pathname);
@@ -118,12 +148,6 @@ export default function Navigation() {
       )}
     </header>
   );
-}
-
-interface NavItemData {
-  label: string;
-  href: string;
-  children?: { label: string; href: string; description?: string }[];
 }
 
 function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string }) {

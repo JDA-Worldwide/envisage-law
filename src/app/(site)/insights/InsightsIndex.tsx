@@ -2,16 +2,27 @@
 
 import { useState } from "react";
 import ArticleCard from "@/components/envisage/ArticleCard";
-import { articles } from "@/lib/data";
+
+export interface Insight {
+  _id: string;
+  title: string;
+  slug: string;
+  category: string;
+  excerpt?: string;
+  publishedAt: string;
+  featured?: boolean;
+  authorName?: string;
+  authorSlug?: string;
+}
 
 const PER_PAGE = 6;
 
-export default function InsightsIndex() {
-  const tags = ["All", ...Array.from(new Set(articles.map((a) => a.tag)))];
+export default function InsightsIndex({ insights }: { insights: Insight[] }) {
+  const tags = ["All", ...Array.from(new Set(insights.map((a) => a.category)))];
   const [active, setActive] = useState("All");
   const [page, setPage] = useState(1);
 
-  const filtered = active === "All" ? articles : articles.filter((a) => a.tag === active);
+  const filtered = active === "All" ? insights : insights.filter((a) => a.category === active);
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
   const paged = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
@@ -40,7 +51,20 @@ export default function InsightsIndex() {
       </div>
       <div className="grid gap-[26px] sm:grid-cols-2 lg:grid-cols-3" aria-live="polite">
         {paged.map((a) => (
-          <ArticleCard key={a.slug} article={a} />
+          <ArticleCard
+            key={a._id}
+            article={{
+              slug: a.slug,
+              tag: a.category,
+              title: a.title,
+              excerpt: a.excerpt ?? "",
+              date: new Date(a.publishedAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              }),
+            }}
+          />
         ))}
       </div>
 

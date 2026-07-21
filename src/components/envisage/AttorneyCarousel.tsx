@@ -4,7 +4,15 @@ import { useRef, useState, useEffect, useCallback, useSyncExternalStore } from "
 import Link from "next/link";
 import AttorneyCard from "./AttorneyCard";
 import { ArrowIcon } from "./Icons";
-import type { Attorney } from "@/lib/data";
+interface Attorney {
+  slug: string;
+  name: string;
+  role: string;
+  niche: string;
+  hasProfile: boolean;
+  href: string;
+  photo: string;
+}
 
 interface AttorneyCarouselProps {
   attorneys: Attorney[];
