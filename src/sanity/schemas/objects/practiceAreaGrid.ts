@@ -8,6 +8,11 @@ export default defineType({
   type: "object",
   fields: [
     defineField({
+      name: "eyebrow",
+      title: "Eyebrow",
+      type: "string",
+    }),
+    defineField({
       name: "heading",
       title: "Heading",
       type: "string",

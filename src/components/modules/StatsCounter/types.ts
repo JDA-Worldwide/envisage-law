@@ -9,5 +9,8 @@ export interface Stat {
 export interface StatsCounterProps {
   _type: "statsCounter";
   _key: string;
+  eyebrow?: string;
+  heading?: string;
+  body?: string;
   stats: Stat[];
 }

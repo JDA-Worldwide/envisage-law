@@ -1,4 +1,4 @@
-import { defineType, defineField, defineArrayMember } from "sanity";
+import { defineType, defineField } from "sanity";
 import { isUnique } from "@/sanity/lib/isUnique";
 
 export default defineType({

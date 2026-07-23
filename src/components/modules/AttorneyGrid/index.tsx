@@ -23,6 +23,7 @@ interface StaffData {
 }
 
 export default async function AttorneyGrid({
+  eyebrow,
   heading,
   showStaff = true,
 }: AttorneyGridProps) {
@@ -33,12 +34,21 @@ export default async function AttorneyGrid({
 
   return (
     <div className="px-6">
-      {heading && (
-        <div className="mb-10 flex items-center gap-5">
-          <h2 className="whitespace-nowrap text-sm font-bold uppercase tracking-[0.14em] text-brand-primary">
-            {heading}
-          </h2>
-          <div className="h-px flex-1 bg-brand-border" />
+      {(eyebrow || heading) && (
+        <div className="mb-10">
+          {eyebrow && (
+            <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">
+              {eyebrow}
+            </p>
+          )}
+          {heading && (
+            <div className="flex items-center gap-5">
+              <h2 className="whitespace-nowrap text-sm font-bold uppercase tracking-[0.14em] text-brand-primary">
+                {heading}
+              </h2>
+              <div className="h-px flex-1 bg-brand-border" />
+            </div>
+          )}
         </div>
       )}
       <div className="grid gap-[26px] sm:grid-cols-2 lg:grid-cols-4">

@@ -1,10 +1,28 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
+import { colorSchemeField } from "./_colorSchemeField";
+import { anchorSlugField } from "./_anchorSlugField";
 
 export default defineType({
   name: "statsCounter",
   title: "Stats Counter",
   type: "object",
   fields: [
+    defineField({
+      name: "eyebrow",
+      title: "Eyebrow",
+      type: "string",
+    }),
+    defineField({
+      name: "heading",
+      title: "Heading",
+      type: "string",
+    }),
+    defineField({
+      name: "body",
+      title: "Body",
+      type: "text",
+      rows: 3,
+    }),
     defineField({
       name: "stats",
       title: "Stats",
@@ -56,6 +74,8 @@ export default defineType({
       ],
       validation: (rule) => rule.min(1),
     }),
+    colorSchemeField,
+    anchorSlugField,
   ],
   preview: {
     select: { stats: "stats" },

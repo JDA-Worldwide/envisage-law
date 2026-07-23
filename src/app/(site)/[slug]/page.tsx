@@ -11,11 +11,7 @@ interface Props {
 // Pages that have dedicated route files — skip so Next.js doesn't conflict.
 const reservedSlugs = new Set([
   "home",
-  "about",
-  "contact",
   "insights",
-  "legal-team",
-  "practice-areas",
   "privacy-policy",
   "terms-of-use",
 ]);

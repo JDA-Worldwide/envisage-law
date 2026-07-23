@@ -6,27 +6,36 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "columns",
-      title: "Link Columns",
+      name: "description",
+      title: "Firm Description",
+      type: "text",
+      rows: 3,
+      description: "Short firm description shown in the brand column",
+    }),
+    defineField({
+      name: "firmLinks",
+      title: "Firm Links",
       type: "array",
+      description: "Links in the 'Firm' column (e.g. About, Legal Team, Insights, Contact)",
       of: [
         defineArrayMember({
           type: "object",
           fields: [
             defineField({
-              name: "title",
-              title: "Column Title",
+              name: "label",
+              title: "Label",
               type: "string",
+              validation: (rule) => rule.required(),
             }),
             defineField({
-              name: "links",
-              title: "Links",
-              type: "array",
-              of: [{ type: "link" }],
+              name: "href",
+              title: "URL",
+              type: "string",
+              validation: (rule) => rule.required(),
             }),
           ],
           preview: {
-            select: { title: "title" },
+            select: { title: "label", subtitle: "href" },
           },
         }),
       ],
@@ -36,7 +45,7 @@ export default defineType({
       title: "Social Links",
       type: "array",
       of: [
-        {
+        defineArrayMember({
           type: "object",
           fields: [
             defineField({
@@ -45,14 +54,14 @@ export default defineType({
               type: "string",
               options: {
                 list: [
-                  "facebook",
-                  "twitter",
-                  "instagram",
-                  "linkedin",
-                  "youtube",
-                  "tiktok",
+                  { title: "LinkedIn", value: "linkedin" },
+                  { title: "X (Twitter)", value: "twitter" },
+                  { title: "Facebook", value: "facebook" },
+                  { title: "Instagram", value: "instagram" },
+                  { title: "YouTube", value: "youtube" },
                 ],
               },
+              validation: (rule) => rule.required(),
             }),
             defineField({
               name: "url",
@@ -64,13 +73,34 @@ export default defineType({
           preview: {
             select: { title: "platform", subtitle: "url" },
           },
-        },
+        }),
       ],
+    }),
+    defineField({
+      name: "locationsText",
+      title: "Locations Text",
+      type: "string",
+      description:
+        "e.g. 'Attorneys conveniently located in Raleigh, NC · Asheville, NC · Columbia, TN.'",
+    }),
+    defineField({
+      name: "translationNotice",
+      title: "Translation Notice",
+      type: "text",
+      rows: 2,
     }),
     defineField({
       name: "copyrightText",
       title: "Copyright Text",
       type: "string",
+      description: "e.g. 'Envisage Law · All Rights Reserved'",
+    }),
+    defineField({
+      name: "disclaimerText",
+      title: "Disclaimer Text",
+      type: "text",
+      rows: 2,
+      description: "Attorney advertising disclaimer",
     }),
   ],
   preview: {

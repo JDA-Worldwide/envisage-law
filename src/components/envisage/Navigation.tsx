@@ -12,6 +12,14 @@ interface NavItemData {
   children?: { label: string; href: string; description?: string }[];
 }
 
+interface SanityNavItem {
+  _key: string;
+  label: string;
+  href: string;
+  autoPopulateChildren?: boolean;
+  children?: { _key: string; label: string; href: string }[];
+}
+
 interface PracticeAreaItem {
   _id: string;
   title: string;
@@ -19,25 +27,50 @@ interface PracticeAreaItem {
 }
 
 interface NavigationProps {
+  nav?: {
+    items?: SanityNavItem[];
+    ctaLabel?: string;
+    ctaHref?: string;
+  };
   practiceAreas: PracticeAreaItem[];
 }
 
 const LOGO_URL = "/envisage-law-logo.svg";
 
-export default function Navigation({ practiceAreas }: NavigationProps) {
-  const NAV_ITEMS: NavItemData[] = [
-    { label: "About", href: "/about" },
-    {
-      label: "Practice Areas",
-      href: "/practice-areas",
-      children: practiceAreas.map((p) => ({
-        label: p.title,
-        href: `/practice-areas/${p.slug}`,
-      })),
-    },
-    { label: "Legal Team", href: "/legal-team" },
-    { label: "Insights", href: "/insights" },
-  ];
+// Fallback nav items if the Sanity navigation document doesn't exist
+const FALLBACK_ITEMS: NavItemData[] = [
+  { label: "About", href: "/about" },
+  { label: "Practice Areas", href: "/practice-areas" },
+  { label: "Legal Team", href: "/legal-team" },
+  { label: "Insights", href: "/insights" },
+];
+
+export default function Navigation({ nav, practiceAreas }: NavigationProps) {
+  const ctaLabel = nav?.ctaLabel ?? "Contact Us";
+  const ctaHref = nav?.ctaHref ?? "/contact";
+
+  const NAV_ITEMS: NavItemData[] = nav?.items?.length
+    ? nav.items.map((item) => ({
+        label: item.label,
+        href: item.href,
+        children: item.autoPopulateChildren
+          ? practiceAreas.map((p) => ({
+              label: p.title,
+              href: `/practice-areas/${p.slug}`,
+            }))
+          : item.children?.map((c) => ({ label: c.label, href: c.href })),
+      }))
+    : FALLBACK_ITEMS.map((item) =>
+        item.href === "/practice-areas"
+          ? {
+              ...item,
+              children: practiceAreas.map((p) => ({
+                label: p.title,
+                href: `/practice-areas/${p.slug}`,
+              })),
+            }
+          : item
+      );
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuPathname, setMenuPathname] = useState(pathname);
@@ -96,10 +129,10 @@ export default function Navigation({ practiceAreas }: NavigationProps) {
             )
           )}
           <Link
-            href="/contact"
+            href={ctaHref}
             className="ml-2 inline-flex items-center gap-2.5 whitespace-nowrap rounded-sm bg-brand-secondary-dark px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:bg-brand-secondary-darker"
           >
-            Contact Us
+            {ctaLabel}
           </Link>
         </div>
 
@@ -138,10 +171,10 @@ export default function Navigation({ practiceAreas }: NavigationProps) {
               <MobileNavItem key={item.href} item={item} pathname={pathname} />
             ))}
             <Link
-              href="/contact"
+              href={ctaHref}
               className="mt-2 flex justify-center rounded-sm bg-brand-secondary-dark px-6 py-3.5 text-sm font-bold uppercase tracking-[0.08em] text-white"
             >
-              Contact Us
+              {ctaLabel}
             </Link>
           </div>
         </div>

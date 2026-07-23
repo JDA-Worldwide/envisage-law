@@ -1,15 +1,14 @@
+export interface CtaBandAction {
+  _key: string;
+  label: string;
+  href: string;
+  variant?: "teal" | "ghost";
+}
+
 export interface CtaBandProps {
   eyebrow?: string;
   heading: string;
   body?: string;
-  primaryButton?: {
-    label: string;
-    url: string;
-    isExternal?: boolean;
-  };
-  secondaryButton?: {
-    label: string;
-    url: string;
-    isExternal?: boolean;
-  };
+  backgroundImage?: { asset: { _ref: string } };
+  actions?: CtaBandAction[];
 }

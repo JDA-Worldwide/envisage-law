@@ -1,9 +1,7 @@
 import type { ComponentType } from "react";
 import { stegaClean } from "@sanity/client/stega";
 import { cn } from "@/lib/utils";
-import Hero from "./modules/Hero";
 import TextBlock from "./modules/TextBlock";
-import CTA from "./modules/CTA";
 import FeatureGrid from "./modules/FeatureGrid";
 import StatsCounter from "./modules/StatsCounter";
 import LogoBar from "./modules/LogoBar";
@@ -11,13 +9,20 @@ import ImageGallery from "./modules/ImageGallery";
 import VideoEmbed from "./modules/VideoEmbed";
 import Testimonials from "./modules/Testimonials";
 import FAQ from "./modules/FAQ";
-import TeamGrid from "./modules/TeamGrid";
 import ContactForm from "./modules/ContactForm";
 import AttorneyGrid from "./modules/AttorneyGrid";
 import PracticeAreaGrid from "./modules/PracticeAreaGrid";
 import AnchoringAttorneyBand from "./modules/AnchoringAttorneyBand";
 import ContactMethods from "./modules/ContactMethods";
 import CtaBand from "./modules/CtaBand";
+import EnvisageHero from "./modules/EnvisageHero";
+import RichTextSection from "./modules/RichTextSection";
+import TextImageSplit from "./modules/TextImageSplit";
+import HighlightGrid from "./modules/HighlightGrid";
+import InsightsGrid from "./modules/InsightsGrid";
+import RecognitionBand from "./modules/RecognitionBand";
+import LocationGrid from "./modules/LocationGrid";
+import ImageBand from "./modules/ImageBand";
 import { JsonLd, faqPageSchema } from "@/lib/jsonLd";
 import { toPlainText, type PortableTextBlock } from "@portabletext/react";
 
@@ -39,9 +44,7 @@ interface PageBuilderProps {
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const moduleMap: Record<string, ComponentType<any>> = {
-  hero: Hero,
   textBlock: TextBlock,
-  cta: CTA,
   featureGrid: FeatureGrid,
   statsCounter: StatsCounter,
   logoBar: LogoBar,
@@ -49,17 +52,24 @@ const moduleMap: Record<string, ComponentType<any>> = {
   videoEmbed: VideoEmbed,
   testimonials: Testimonials,
   faq: FAQ,
-  teamGrid: TeamGrid,
   contactForm: ContactForm,
   attorneyGrid: AttorneyGrid,
   practiceAreaGrid: PracticeAreaGrid,
   anchoringAttorneyBand: AnchoringAttorneyBand,
   contactMethods: ContactMethods,
   ctaBand: CtaBand,
+  envisageHero: EnvisageHero,
+  richTextSection: RichTextSection,
+  textImageSplit: TextImageSplit,
+  highlightGrid: HighlightGrid,
+  insightsGrid: InsightsGrid,
+  recognitionBand: RecognitionBand,
+  locationGrid: LocationGrid,
+  imageBand: ImageBand,
 };
 
 // Full-bleed modules render edge-to-edge with no section padding wrapper.
-const fullBleedModules = new Set(["hero", "cta"]);
+const fullBleedModules = new Set(["envisageHero", "ctaBand", "highlightGrid", "recognitionBand", "imageBand"]);
 
 function buildFaqJsonLd(module: FAQModule) {
   if (!module.items?.length) return null;

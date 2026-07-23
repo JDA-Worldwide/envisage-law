@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { draftMode } from "next/headers";
+import { SanityLive } from "@/sanity/lib/live";
+import VisualEditingClient from "@/components/global/VisualEditingClient";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -21,11 +24,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
   return (
     <html lang="en" className={montserrat.variable} suppressHydrationWarning>
       <body className="antialiased">
@@ -36,6 +41,8 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <SanityLive />
+        {isDraftMode && <VisualEditingClient />}
         <Analytics />
         <SpeedInsights />
       </body>

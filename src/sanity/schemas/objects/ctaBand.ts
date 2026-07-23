@@ -1,4 +1,4 @@
-import { defineType, defineField } from "sanity";
+import { defineType, defineField, defineArrayMember } from "sanity";
 import { colorSchemeField } from "./_colorSchemeField";
 import { anchorSlugField } from "./_anchorSlugField";
 
@@ -6,13 +6,12 @@ export default defineType({
   name: "ctaBand",
   title: "CTA Band",
   type: "object",
-  description: "Full-width call-to-action band with eyebrow, heading, and buttons",
+  description: "Full-width call-to-action band with background image, eyebrow, heading, and buttons",
   fields: [
     defineField({
       name: "eyebrow",
       title: "Eyebrow",
       type: "string",
-      description: "Small label above the heading",
     }),
     defineField({
       name: "heading",
@@ -27,14 +26,49 @@ export default defineType({
       rows: 3,
     }),
     defineField({
-      name: "primaryButton",
-      title: "Primary Button",
-      type: "link",
+      name: "backgroundImage",
+      title: "Background Image",
+      type: "image",
+      options: { hotspot: true },
     }),
     defineField({
-      name: "secondaryButton",
-      title: "Secondary Button",
-      type: "link",
+      name: "actions",
+      title: "Action Buttons",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "label",
+              title: "Label",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "href",
+              title: "URL",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "variant",
+              title: "Style",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Teal (Primary)", value: "teal" },
+                  { title: "Ghost (Outline)", value: "ghost" },
+                ],
+              },
+              initialValue: "teal",
+            }),
+          ],
+          preview: {
+            select: { title: "label", subtitle: "href" },
+          },
+        }),
+      ],
     }),
     colorSchemeField,
     anchorSlugField,

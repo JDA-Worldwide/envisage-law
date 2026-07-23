@@ -35,13 +35,7 @@ export default defineType({
       name: "phone",
       title: "Phone Number",
       type: "string",
-      description: "Display format, e.g. 919.268.8998",
-    }),
-    defineField({
-      name: "phoneTel",
-      title: "Phone (tel link)",
-      type: "string",
-      description: "tel: format for click-to-call, e.g. 9192688998",
+      description: "e.g. 919.268.8998 — the tel: link is generated automatically",
     }),
     defineField({
       name: "mailingAddress",
@@ -100,43 +94,6 @@ export default defineType({
       name: "defaultSeo",
       title: "Default SEO",
       type: "seo",
-    }),
-    defineField({
-      name: "socialLinks",
-      title: "Social Links",
-      type: "array",
-      of: [
-        {
-          type: "object",
-          fields: [
-            defineField({
-              name: "platform",
-              title: "Platform",
-              type: "string",
-              options: {
-                list: [
-                  "facebook",
-                  "twitter",
-                  "instagram",
-                  "linkedin",
-                  "youtube",
-                  "tiktok",
-                ],
-              },
-              validation: (rule) => rule.required(),
-            }),
-            defineField({
-              name: "url",
-              title: "URL",
-              type: "url",
-              validation: (rule) => rule.required(),
-            }),
-          ],
-          preview: {
-            select: { title: "platform", subtitle: "url" },
-          },
-        },
-      ],
     }),
   ],
   preview: {

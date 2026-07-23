@@ -14,65 +14,72 @@ export default defineType({
           type: "object",
           fields: [
             defineField({
-              name: "isExternal",
-              title: "External Link",
-              type: "boolean",
-              initialValue: false,
+              name: "label",
+              title: "Label",
+              type: "string",
+              validation: (rule) => rule.required(),
             }),
             defineField({
-              name: "pageRef",
-              title: "Page",
-              type: "reference",
-              to: [{ type: "page" }],
-              hidden: ({ parent }) => (parent as { isExternal?: boolean })?.isExternal === true,
-              validation: (rule) =>
-                rule.custom((value, { parent }) => {
-                  const p = parent as { isExternal?: boolean };
-                  if (!p?.isExternal && !value) return "Required for internal links";
-                  return true;
-                }),
-            }),
-            defineField({
-              name: "url",
+              name: "href",
               title: "URL",
               type: "string",
-              hidden: ({ parent }) => (parent as { isExternal?: boolean })?.isExternal !== true,
-              validation: (rule) =>
-                rule.custom((value, { parent }) => {
-                  const p = parent as { isExternal?: boolean };
-                  if (p?.isExternal && !value) return "Required for external links";
-                  return true;
-                }),
+              description: "e.g. /about, /legal-team, /practice-areas",
+              validation: (rule) => rule.required(),
             }),
             defineField({
-              name: "label",
-              title: "Label Override",
-              type: "string",
-              description: "Defaults to the page title if left blank",
+              name: "autoPopulateChildren",
+              title: "Auto-populate dropdown from Practice Areas",
+              type: "boolean",
+              description:
+                "When enabled, dropdown items are automatically generated from Practice Area documents",
+              initialValue: false,
             }),
             defineField({
               name: "children",
               title: "Dropdown Items",
               type: "array",
-              of: [{ type: "link" }],
+              description: "Manual dropdown links (ignored if auto-populate is enabled)",
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  fields: [
+                    defineField({
+                      name: "label",
+                      title: "Label",
+                      type: "string",
+                      validation: (rule) => rule.required(),
+                    }),
+                    defineField({
+                      name: "href",
+                      title: "URL",
+                      type: "string",
+                      validation: (rule) => rule.required(),
+                    }),
+                  ],
+                  preview: {
+                    select: { title: "label", subtitle: "href" },
+                  },
+                }),
+              ],
             }),
           ],
           preview: {
-            select: {
-              label: "label",
-              pageTitle: "pageRef.title",
-              url: "url",
-              slug: "pageRef.slug.current",
-            },
-            prepare({ label, pageTitle, url, slug }: { label?: string; pageTitle?: string; url?: string; slug?: string }) {
-              return {
-                title: label || pageTitle || "Untitled",
-                subtitle: url || (slug ? `/${slug}` : ""),
-              };
-            },
+            select: { title: "label", subtitle: "href" },
           },
         }),
       ],
+    }),
+    defineField({
+      name: "ctaLabel",
+      title: "CTA Button Label",
+      type: "string",
+      description: "e.g. 'Contact Us'",
+    }),
+    defineField({
+      name: "ctaHref",
+      title: "CTA Button URL",
+      type: "string",
+      description: "e.g. /contact",
     }),
   ],
   preview: {

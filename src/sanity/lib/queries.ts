@@ -2,6 +2,7 @@ import { groq } from "next-sanity";
 
 // Reusable GROQ fragment — resolves a `link` object's URL from either a
 // pageRef slug (internal) or a plain url string (external).
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const linkFields = /* groq */ `
   "label": coalesce(label, pageRef->title),
   isExternal,
@@ -29,35 +30,28 @@ export const settingsQuery = groq`
     logo,
     defaultSeo,
     phone,
-    phoneTel,
     mailingAddress,
     lawpayUrl,
     heroImage,
     courthouseImage,
     consultationImage,
-    raleighSkylineImage,
-    socialLinks[] {
-      _key,
-      platform,
-      url
-    }
+    raleighSkylineImage
   }
 `;
 
 export const navigationQuery = groq`
   *[_type == "navigation"][0] {
-    "ctaLabel": coalesce(ctaLabel, ctaPage->title),
-    "ctaUrl": "/" + ctaPage->slug.current,
+    ctaLabel,
+    ctaHref,
     items[] {
       _key,
-      "label": coalesce(label, pageRef->title),
-      "url": select(isExternal == true => url, "/" + pageRef->slug.current),
-      isExternal,
+      label,
+      href,
+      autoPopulateChildren,
       children[] {
         _key,
-        "label": coalesce(label, pageRef->title),
-        "url": select(isExternal == true => url, "/" + pageRef->slug.current),
-        isExternal
+        label,
+        href
       }
     }
   }
@@ -65,20 +59,21 @@ export const navigationQuery = groq`
 
 export const footerQuery = groq`
   *[_type == "footer"][0] {
-    columns[] {
+    description,
+    firmLinks[] {
       _key,
-      title,
-      links[] {
-        _key,
-        ${linkFields}
-      }
+      label,
+      href
     },
     socialLinks[] {
       _key,
       platform,
       url
     },
-    copyrightText
+    locationsText,
+    translationNotice,
+    copyrightText,
+    disclaimerText
   }
 `;
 
@@ -97,16 +92,6 @@ export const pageBySlugQuery = groq`
     seo,
     modules[] {
       ...,
-      _type == "teamGrid" => {
-        heading,
-        members[]-> {
-          _id,
-          name,
-          jobTitle,
-          photo,
-          bio
-        }
-      },
       _type == "anchoringAttorneyBand" => {
         ...,
         attorney-> {
@@ -130,16 +115,6 @@ export const homepageQuery = groq`
     seo,
     modules[] {
       ...,
-      _type == "teamGrid" => {
-        heading,
-        members[]-> {
-          _id,
-          name,
-          jobTitle,
-          photo,
-          bio
-        }
-      },
       _type == "anchoringAttorneyBand" => {
         ...,
         attorney-> {
