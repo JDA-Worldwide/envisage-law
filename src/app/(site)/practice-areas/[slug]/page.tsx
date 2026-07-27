@@ -6,6 +6,7 @@ import Hero from "@/components/envisage/Hero";
 import SanityImage from "@/components/ui/SanityImage";
 import PortableText from "@/components/ui/PortableText";
 import { CheckIcon } from "@/components/envisage/Icons";
+import { stegaClean } from "@sanity/client/stega";
 import { getSiteImages } from "@/lib/siteImages";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
@@ -51,7 +52,8 @@ export default async function PracticeAreaPage({ params }: Props) {
 
   if (!pa) notFound();
 
-  const phone = settings?.phone ?? "919.268.8998";
+  const phone = stegaClean(settings?.phone) ?? "919.268.8998";
+  const phoneTel = phone.replace(/[^\d]/g, "");
 
   return (
     <>
@@ -172,7 +174,7 @@ export default async function PracticeAreaPage({ params }: Props) {
             No intake forms. Reach an attorney directly by phone or email.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href={`tel:${phone.replace(/\./g, "")}`} className="inline-flex items-center rounded-sm bg-brand-primary px-7 py-3.5 text-sm font-bold uppercase tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:bg-[#032a5c]">
+            <a href={`tel:${phoneTel}`} className="inline-flex items-center rounded-sm bg-brand-primary px-7 py-3.5 text-sm font-bold uppercase tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:bg-[#032a5c]">
               Call {phone}
             </a>
             <Link href="/contact" className="inline-flex items-center rounded-sm border-2 border-brand-primary bg-transparent px-7 py-3.5 text-sm font-bold uppercase tracking-[0.08em] text-brand-primary transition-all hover:bg-brand-primary hover:text-white">

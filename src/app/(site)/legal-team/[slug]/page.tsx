@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import SanityImage from "@/components/ui/SanityImage";
 import PortableText from "@/components/ui/PortableText";
 import { EmailIcon, PhoneIcon } from "@/components/envisage/Icons";
+import { stegaClean } from "@sanity/client/stega";
 import { getSiteImages } from "@/lib/siteImages";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
@@ -99,13 +100,13 @@ export default async function AttorneyPage({ params }: Props) {
 
               <div className="mt-[22px] flex flex-col gap-3">
                 {attorney.email && (
-                  <a href={`mailto:${attorney.email}`} className="flex items-center gap-3 rounded-md border border-brand-border px-3.5 py-3 text-[15px] font-semibold text-brand-primary transition-all hover:border-brand-secondary hover:bg-brand-surface">
+                  <a href={`mailto:${stegaClean(attorney.email)}`} className="flex items-center gap-3 rounded-md border border-brand-border px-3.5 py-3 text-[15px] font-semibold text-brand-primary transition-all hover:border-brand-secondary hover:bg-brand-surface">
                     <EmailIcon className="h-[18px] w-[18px] flex-none text-brand-secondary" />
                     {attorney.email}
                   </a>
                 )}
                 {attorney.phone && (
-                  <a href={`tel:${attorney.phone.replace(/[^\d]/g, "")}`} className="flex items-center gap-3 rounded-md border border-brand-border px-3.5 py-3 text-[15px] font-semibold text-brand-primary transition-all hover:border-brand-secondary hover:bg-brand-surface">
+                  <a href={`tel:${stegaClean(attorney.phone).replace(/[^\d]/g, "")}`} className="flex items-center gap-3 rounded-md border border-brand-border px-3.5 py-3 text-[15px] font-semibold text-brand-primary transition-all hover:border-brand-secondary hover:bg-brand-surface">
                     <PhoneIcon className="h-[18px] w-[18px] flex-none text-brand-secondary" />
                     {attorney.phone}
                   </a>
@@ -178,7 +179,7 @@ export default async function AttorneyPage({ params }: Props) {
 
               <div className="mt-10 flex flex-wrap gap-3.5">
                 {attorney.email && (
-                  <a href={`mailto:${attorney.email}`} className="inline-flex items-center rounded-sm bg-brand-primary px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:bg-[#032a5c]">
+                  <a href={`mailto:${stegaClean(attorney.email)}`} className="inline-flex items-center rounded-sm bg-brand-primary px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:bg-[#032a5c]">
                     Email {attorney.name.split(" ")[0]}
                   </a>
                 )}

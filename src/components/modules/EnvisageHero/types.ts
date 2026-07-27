@@ -13,8 +13,7 @@ export interface EnvisageHeroBreadcrumb {
 
 export interface EnvisageHeroProps {
   eyebrow?: string;
-  heading: string;
-  accentText?: string;
+  heading: unknown[];
   subtitle?: string;
   actions?: EnvisageHeroAction[];
   breadcrumbs?: EnvisageHeroBreadcrumb[];
