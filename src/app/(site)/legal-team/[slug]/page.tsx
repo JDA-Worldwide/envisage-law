@@ -177,12 +177,7 @@ export default async function AttorneyPage({ params }: Props) {
                 </div>
               ))}
 
-              <div className="mt-10 flex flex-wrap gap-3.5">
-                {attorney.email && (
-                  <a href={`mailto:${stegaClean(attorney.email)}`} className="inline-flex items-center rounded-sm bg-brand-primary px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:bg-[#032a5c]">
-                    Email {attorney.name.split(" ")[0]}
-                  </a>
-                )}
+              <div className="mt-10">
                 <Link href="/legal-team" className="inline-flex items-center rounded-sm border-2 border-brand-primary bg-transparent px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-brand-primary transition-all hover:bg-brand-primary hover:text-white">
                   Legal Team
                 </Link>
