@@ -1,13 +1,24 @@
 import Link from "next/link";
 import { stegaClean } from "@sanity/client/stega";
+import { PortableText, type PortableTextComponents, type PortableTextBlock } from "@portabletext/react";
 import Container from "@/components/ui/Container";
 import { urlFor } from "@/sanity/lib/image";
 import type { EnvisageHeroProps } from "./types";
 
+const heroHeadingComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => <>{children}</>,
+  },
+  marks: {
+    strong: ({ children }) => (
+      <strong className="font-extrabold text-brand-accent">{children}</strong>
+    ),
+  },
+};
+
 export default function EnvisageHero({
   eyebrow,
   heading,
-  accentText,
   subtitle,
   actions,
   breadcrumbs,
@@ -55,9 +66,10 @@ export default function EnvisageHero({
           </p>
         )}
         <h1 className="max-w-[900px] text-[clamp(34px,5vw,62px)] font-extrabold leading-[1.08] text-white">
-          {heading}
-          {accentText && (
-            <> <span className="text-brand-accent">{accentText}</span></>
+          {Array.isArray(heading) ? (
+            <PortableText value={heading as PortableTextBlock[]} components={heroHeadingComponents} />
+          ) : (
+            heading
           )}
         </h1>
         {subtitle && (

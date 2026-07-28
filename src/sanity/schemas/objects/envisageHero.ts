@@ -13,14 +13,20 @@ export default defineType({
     defineField({
       name: "heading",
       title: "Heading",
-      type: "string",
+      type: "array",
+      description: "Bold any text to highlight it in gold",
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "accentText",
-      title: "Accent Text",
-      type: "string",
-      description: "Gold-highlighted phrase appended to the heading (e.g. 'cutting-edge strategy')",
+      of: [
+        defineArrayMember({
+          type: "block",
+          styles: [],
+          lists: [],
+          marks: {
+            decorators: [{ title: "Highlight", value: "strong" }],
+            annotations: [],
+          },
+        }),
+      ],
     }),
     defineField({
       name: "subtitle",
@@ -109,9 +115,12 @@ export default defineType({
     }),
   ],
   preview: {
-    select: { title: "heading" },
-    prepare({ title }) {
-      return { title: title || "Hero", subtitle: "Hero" };
+    select: { heading: "heading" },
+    prepare({ heading }) {
+      const text = Array.isArray(heading)
+        ? heading.map((b: { children?: { text?: string }[] }) => b.children?.map((c) => c.text).join("") || "").join(" ")
+        : heading || "";
+      return { title: text || "Hero", subtitle: "Hero" };
     },
   },
 });

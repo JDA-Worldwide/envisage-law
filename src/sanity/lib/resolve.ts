@@ -6,6 +6,18 @@ export const mainDocuments = defineDocuments([
     filter: `_type == "page" && slug.current == "home"`,
   },
   {
+    route: "/insights",
+    filter: `_type == "page" && slug.current == "insights"`,
+  },
+  {
+    route: "/privacy-policy",
+    filter: `_type == "page" && slug.current == "privacy-policy"`,
+  },
+  {
+    route: "/terms-of-use",
+    filter: `_type == "page" && slug.current == "terms-of-use"`,
+  },
+  {
     route: "/:slug",
     filter: `_type == "page" && slug.current == $slug`,
   },

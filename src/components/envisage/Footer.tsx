@@ -82,9 +82,9 @@ const PLATFORM_LABELS: Record<string, string> = {
 
 export default function Footer({ footer, settings, practiceAreas }: FooterProps) {
   const year = new Date().getFullYear();
-  const phone = settings?.phone ?? "919.268.8998";
+  const phone = stegaClean(settings?.phone) || "919.268.8998";
   const phoneTel = phone.replace(/[^\d]/g, "");
-  const address = settings?.mailingAddress ?? "Envisage Law\nPO Box 30099\nRaleigh, North Carolina 27622";
+  const address = stegaClean(settings?.mailingAddress) || "Envisage Law\nPO Box 30099\nRaleigh, North Carolina 27622";
 
   const description =
     footer?.description ??
