@@ -1,4 +1,5 @@
 import { defineType, defineField } from "sanity";
+import { orderRankField } from "@sanity/orderable-document-list";
 import { isUnique } from "@/sanity/lib/isUnique";
 
 export default defineType({
@@ -131,12 +132,7 @@ export default defineType({
       description:
         "e.g. 'Discuss an IP or technology matter'. Falls back to a default if blank.",
     }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-      description: "Controls sort order on the Practice Areas hub page",
-    }),
+    orderRankField({ type: "practiceArea" }),
     defineField({
       name: "seo",
       title: "SEO",
@@ -147,7 +143,7 @@ export default defineType({
     {
       title: "Display Order",
       name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
+      by: [{ field: "orderRank", direction: "asc" }],
     },
   ],
   preview: {

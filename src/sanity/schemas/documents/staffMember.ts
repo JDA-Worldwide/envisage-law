@@ -1,4 +1,5 @@
 import { defineType, defineField } from "sanity";
+import { orderRankField } from "@sanity/orderable-document-list";
 
 export default defineType({
   name: "staffMember",
@@ -38,17 +39,13 @@ export default defineType({
       type: "string",
       description: "Shown as placeholder if no photo is provided",
     }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-    }),
+    orderRankField({ type: "staffMember" }),
   ],
   orderings: [
     {
       title: "Display Order",
       name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
+      by: [{ field: "orderRank", direction: "asc" }],
     },
   ],
   preview: {
