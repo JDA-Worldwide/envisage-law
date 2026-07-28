@@ -41,8 +41,7 @@ export default async function RootLayout({
           Skip to content
         </a>
         {children}
-        <SanityLive />
-        {isDraftMode && <VisualEditingClient />}
+        {isDraftMode ? <VisualEditingClient /> : <SanityLive />}
         <Analytics />
         <SpeedInsights />
       </body>
