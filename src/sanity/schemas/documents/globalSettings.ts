@@ -91,6 +91,13 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "cookieConsentMessage",
+      title: "Cookie Consent Message",
+      type: "text",
+      rows: 3,
+      description: "Banner text shown to first-time visitors. Leave blank to hide the banner.",
+    }),
+    defineField({
       name: "defaultSeo",
       title: "Default SEO",
       type: "seo",
