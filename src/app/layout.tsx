@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { draftMode } from "next/headers";
 import { SanityLive } from "@/sanity/lib/live";
 import VisualEditingClient from "@/components/global/VisualEditingClient";
+import GoogleAnalytics from "@/components/global/GoogleAnalytics";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -44,6 +45,7 @@ export default async function RootLayout({
         {isDraftMode ? <VisualEditingClient /> : <SanityLive />}
         <Analytics />
         <SpeedInsights />
+        <GoogleAnalytics disabled={isDraftMode} />
       </body>
     </html>
   );
