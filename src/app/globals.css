@@ -138,11 +138,6 @@
   }
 }
 
-/* ── Smooth Scroll ── */
-html {
-  scroll-behavior: smooth;
-}
-
 /* ── GSAP Animation Defaults ── */
 [data-animate-fadeinup] {
   opacity: 0;
