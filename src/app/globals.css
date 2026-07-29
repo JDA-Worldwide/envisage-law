@@ -250,13 +250,15 @@ body[data-preview] [data-animate-fadeinup] {
 }
 
 /* ── Google Translate widget ── */
-/* Suppress the injected top banner and the body offset it forces */
+/* Suppress the injected top banner (and the body offset it forces) */
+iframe.skiptranslate,
 .goog-te-banner-frame.skiptranslate,
 .goog-te-gadget-icon {
   display: none !important;
 }
 body {
   top: 0 !important;
+  position: static !important;
 }
 /* Style the language dropdown to fit the dark footer */
 .goog-te-gadget {
