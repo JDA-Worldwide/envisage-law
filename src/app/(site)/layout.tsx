@@ -1,5 +1,7 @@
+import { groq } from "next-sanity";
 import Navigation from "@/components/envisage/Navigation";
 import Footer from "@/components/envisage/Footer";
+import CookieConsent from "@/components/global/CookieConsent";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   settingsQuery,
@@ -7,6 +9,8 @@ import {
   navigationQuery,
   footerQuery,
 } from "@/sanity/lib/queries";
+
+const cookieConsentQuery = groq`*[_type == "globalSettings"][0].cookieConsentMessage`;
 
 export default async function SiteLayout({
   children,
@@ -18,11 +22,13 @@ export default async function SiteLayout({
     { data: practiceAreas },
     { data: nav },
     { data: footer },
+    { data: cookieMessage },
   ] = await Promise.all([
     sanityFetch({ query: settingsQuery }),
     sanityFetch({ query: allPracticeAreasQuery }),
     sanityFetch({ query: navigationQuery }),
     sanityFetch({ query: footerQuery }),
+    sanityFetch({ query: cookieConsentQuery, stega: false }),
   ]);
 
   return (
@@ -30,6 +36,7 @@ export default async function SiteLayout({
       <Navigation nav={nav} practiceAreas={practiceAreas ?? []} />
       <main id="main-content">{children}</main>
       <Footer footer={footer} settings={settings} practiceAreas={practiceAreas ?? []} />
+      <CookieConsent message={cookieMessage} />
     </>
   );
 }

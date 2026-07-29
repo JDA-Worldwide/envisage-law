@@ -8,7 +8,8 @@ export default function CookieConsent({ message }: { message?: string }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (message && !localStorage.getItem(STORAGE_KEY)) {
+    const isIframe = window.self !== window.top;
+    if (message && !isIframe && !localStorage.getItem(STORAGE_KEY)) {
       setVisible(true);
     }
   }, [message]);
