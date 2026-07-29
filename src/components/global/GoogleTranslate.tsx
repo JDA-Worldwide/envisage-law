@@ -42,7 +42,7 @@ export default function GoogleTranslate({ isPreview }: { isPreview: boolean }) {
   if (isPreview) return null;
 
   return (
-    <>
+    <div>
       <span className="sr-only-text" id="google-translate-label">
         Translate this site
       </span>
@@ -50,10 +50,13 @@ export default function GoogleTranslate({ isPreview }: { isPreview: boolean }) {
         id="google_translate_element"
         aria-labelledby="google-translate-label"
       />
+      <p className="mt-1 text-[10px] text-white/50 whitespace-nowrap">
+        Powered by <span className="text-white">Google Translate</span>
+      </p>
       <Script
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
         strategy="afterInteractive"
       />
-    </>
+    </div>
   );
 }
