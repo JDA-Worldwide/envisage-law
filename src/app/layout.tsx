@@ -42,7 +42,12 @@ export default async function RootLayout({
           Skip to content
         </a>
         {children}
-        {isDraftMode ? <VisualEditingClient /> : <SanityLive />}
+        {isDraftMode && (
+          <>
+            <SanityLive />
+            <VisualEditingClient />
+          </>
+        )}
         <Analytics />
         <SpeedInsights />
         <GoogleAnalytics disabled={isDraftMode} />
