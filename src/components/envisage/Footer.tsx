@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { stegaClean } from "@sanity/client/stega";
 import Container from "@/components/ui/Container";
+import GoogleTranslate from "@/components/global/GoogleTranslate";
 
 interface Settings {
   phone?: string;
@@ -40,6 +41,7 @@ interface FooterProps {
   footer?: FooterData;
   settings?: Settings;
   practiceAreas: PracticeAreaItem[];
+  isPreview?: boolean;
 }
 
 const LOGO_URL = "/envisage-law-logo.svg";
@@ -80,7 +82,7 @@ const PLATFORM_LABELS: Record<string, string> = {
   youtube: "YouTube",
 };
 
-export default function Footer({ footer, settings, practiceAreas }: FooterProps) {
+export default function Footer({ footer, settings, practiceAreas, isPreview = false }: FooterProps) {
   const year = new Date().getFullYear();
   const phone = stegaClean(settings?.phone) || "919.268.8998";
   const phoneTel = phone.replace(/[^\d]/g, "");
@@ -192,12 +194,15 @@ export default function Footer({ footer, settings, practiceAreas }: FooterProps)
           </div>
         </div>
 
-        {/* Translation notice */}
-        {translationNotice && (
-          <p className="border-b border-white/[0.12] py-5 text-[12.5px] leading-[1.6] text-white/55">
-            <strong className="text-white/70">Translation notice.</strong> {translationNotice}
-          </p>
-        )}
+        {/* Translation */}
+        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-white/[0.12] py-5">
+          {translationNotice && (
+            <p className="max-w-[720px] text-[12.5px] leading-[1.6] text-white/55">
+              <strong className="text-white/70">Translation notice.</strong> {translationNotice}
+            </p>
+          )}
+          <GoogleTranslate isPreview={isPreview} />
+        </div>
 
         {/* Bottom bar */}
         <div className="flex flex-wrap items-center justify-between gap-5 py-7 text-[13px] text-white/75">

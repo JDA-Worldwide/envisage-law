@@ -248,3 +248,44 @@ body[data-preview] [data-animate-fadeinup] {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* ── Google Translate widget ── */
+/* Suppress the injected top banner (and the body offset it forces) */
+iframe.skiptranslate,
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+  position: static !important;
+}
+/* Style the language dropdown to fit the dark footer.
+   Hide Google's default attribution (we render our own below the select). */
+.goog-te-gadget {
+  font-size: 0 !important;
+  color: transparent !important;
+  line-height: 0 !important;
+}
+.goog-te-gadget > span {
+  display: none !important;
+}
+.goog-te-gadget img {
+  display: none !important;
+}
+.goog-te-gadget a {
+  display: none !important;
+}
+.goog-te-gadget .goog-te-combo {
+  margin: 0;
+  padding: 6px 10px;
+  font-size: 13px !important;
+  color: #fff !important;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  cursor: pointer;
+}
+.goog-te-gadget .goog-te-combo option {
+  color: #1a202c !important;
+}

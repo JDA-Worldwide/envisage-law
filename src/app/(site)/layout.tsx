@@ -1,4 +1,5 @@
 import { groq } from "next-sanity";
+import { draftMode } from "next/headers";
 import Navigation from "@/components/envisage/Navigation";
 import Footer from "@/components/envisage/Footer";
 import CookieConsent from "@/components/global/CookieConsent";
@@ -23,19 +24,26 @@ export default async function SiteLayout({
     { data: nav },
     { data: footer },
     { data: cookieMessage },
+    { isEnabled: isDraftMode },
   ] = await Promise.all([
     sanityFetch({ query: settingsQuery }),
     sanityFetch({ query: allPracticeAreasQuery }),
     sanityFetch({ query: navigationQuery }),
     sanityFetch({ query: footerQuery }),
     sanityFetch({ query: cookieConsentQuery, stega: false }),
+    draftMode(),
   ]);
 
   return (
     <>
       <Navigation nav={nav} practiceAreas={practiceAreas ?? []} />
       <main id="main-content">{children}</main>
-      <Footer footer={footer} settings={settings} practiceAreas={practiceAreas ?? []} />
+      <Footer
+        footer={footer}
+        settings={settings}
+        practiceAreas={practiceAreas ?? []}
+        isPreview={isDraftMode}
+      />
       <CookieConsent message={cookieMessage} />
     </>
   );
