@@ -1,6 +1,7 @@
 import type { StructureResolver } from "sanity/structure";
+import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 
-export const structure: StructureResolver = (S) =>
+export const structure: StructureResolver = (S, context) =>
   S.list()
     .title("Content")
     .items([
@@ -12,9 +13,9 @@ export const structure: StructureResolver = (S) =>
         ),
       S.divider(),
       S.documentTypeListItem("page").title("Pages"),
-      S.documentTypeListItem("attorney").title("Attorneys"),
-      S.documentTypeListItem("staffMember").title("Staff Members"),
-      S.documentTypeListItem("practiceArea").title("Practice Areas"),
+      orderableDocumentListDeskItem({ type: "attorney", title: "Attorneys", S, context }),
+      orderableDocumentListDeskItem({ type: "staffMember", title: "Staff Members", S, context }),
+      orderableDocumentListDeskItem({ type: "practiceArea", title: "Practice Areas", S, context }),
       S.documentTypeListItem("insight").title("Insights"),
       S.divider(),
       S.listItem()

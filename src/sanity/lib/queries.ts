@@ -134,7 +134,7 @@ export const homepageQuery = groq`
 // --- Attorneys ---
 
 export const allAttorneysQuery = groq`
-  *[_type == "attorney"] | order(order asc) {
+  *[_type == "attorney"] | order(orderRank asc) {
     _id,
     name,
     "slug": slug.current,
@@ -181,7 +181,7 @@ export const attorneyBySlugQuery = groq`
 // --- Staff ---
 
 export const allStaffQuery = groq`
-  *[_type == "staffMember"] | order(order asc) {
+  *[_type == "staffMember"] | order(orderRank asc) {
     _id,
     name,
     role,
@@ -193,7 +193,7 @@ export const allStaffQuery = groq`
 // --- Practice Areas ---
 
 export const allPracticeAreasQuery = groq`
-  *[_type == "practiceArea"] | order(order asc) {
+  *[_type == "practiceArea"] | order(orderRank asc) {
     _id,
     title,
     "slug": slug.current,
