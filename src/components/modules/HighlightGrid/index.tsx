@@ -25,7 +25,7 @@ function NumberedVariant({ eyebrow, heading, items }: HighlightGridProps) {
       {(eyebrow || heading) && (
         <div className="mb-14 text-center">
           {eyebrow && (
-            <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">
+            <p className={`text-[18px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark ${heading ? "mb-[18px]" : ""}`}>
               {eyebrow}
             </p>
           )}
@@ -37,11 +37,8 @@ function NumberedVariant({ eyebrow, heading, items }: HighlightGridProps) {
         </div>
       )}
       <div className="grid gap-10 lg:grid-cols-3">
-        {(items ?? []).map((item, i) => (
+        {(items ?? []).map((item) => (
           <div key={item._key} className="border-t-[3px] border-brand-primary pt-7">
-            <div className="mb-3.5 text-sm font-extrabold tracking-[0.1em] text-brand-secondary-dark">
-              {String(i + 1).padStart(2, "0")}
-            </div>
             <h3 className="mb-3.5 text-[26px] font-extrabold text-brand-primary">{item.title}</h3>
             {item.text && (
               <p className="text-[15.5px] leading-[1.65] text-brand-muted">{item.text}</p>
