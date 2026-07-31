@@ -46,6 +46,7 @@ export default defineType({
       name: "email",
       title: "Email",
       type: "string",
+      description: "If provided, this will be displayed on the attorney's profile page",
       validation: (rule) => rule.email(),
     }),
     defineField({
