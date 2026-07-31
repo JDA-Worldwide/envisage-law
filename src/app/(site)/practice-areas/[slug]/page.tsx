@@ -170,8 +170,7 @@ export default async function PracticeAreaPage({ params }: Props) {
           <h2 className="text-[clamp(28px,3.5vw,42px)] font-extrabold text-brand-primary">
             {pa.ctaHeading || `Discuss a ${pa.title.toLowerCase()} matter`}
           </h2>
-          <div className="mb-8 mt-4" />
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a href={`tel:${phoneTel}`} className="inline-flex items-center rounded-sm bg-brand-primary px-7 py-3.5 text-sm font-bold uppercase tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:bg-[#032a5c]">
               Call {phone}
             </a>
