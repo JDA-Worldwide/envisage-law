@@ -199,6 +199,32 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: "badges",
+      title: "Badges & Certifications",
+      type: "array",
+      description: "Certification or recognition badge images (e.g. Board Certified Specialist, Super Lawyers)",
+      of: [
+        defineArrayMember({
+          type: "image",
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alt Text",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: "superLawyersUrl",
+      title: "Super Lawyers Profile URL",
+      type: "url",
+      description:
+        "Paste the Super Lawyers profile URL to display the badge widget (e.g. https://profiles.superlawyers.com/…)",
+    }),
     orderRankField({ type: "attorney" }),
     defineField({
       name: "seo",
