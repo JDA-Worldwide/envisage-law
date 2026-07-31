@@ -25,7 +25,7 @@ function NumberedVariant({ eyebrow, heading, items }: HighlightGridProps) {
       {(eyebrow || heading) && (
         <div className="mb-14 text-center">
           {eyebrow && (
-            <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">
+            <p className={`text-[18px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark ${heading ? "mb-[18px]" : ""}`}>
               {eyebrow}
             </p>
           )}
