@@ -174,6 +174,8 @@ export const attorneyBySlugQuery = groq`
         value
       }
     },
+    badges,
+    superLawyersUrl,
     seo
   }
 `;

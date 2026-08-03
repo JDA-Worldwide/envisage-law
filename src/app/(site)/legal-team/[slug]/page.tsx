@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import SanityImage from "@/components/ui/SanityImage";
 import PortableText from "@/components/ui/PortableText";
 import { EmailIcon, PhoneIcon } from "@/components/envisage/Icons";
+import SuperLawyersBadge from "@/components/envisage/SuperLawyersBadge";
 import { stegaClean } from "@sanity/client/stega";
 import { getSiteImages } from "@/lib/siteImages";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -96,6 +97,27 @@ export default async function AttorneyPage({ params }: Props) {
                     )}
                   </div>
                 </div>
+              )}
+
+              {attorney.badges?.length > 0 && (
+                <div className="mt-[22px] flex flex-col gap-3">
+                  {attorney.badges.map((badge: { _key: string; _type: string; alt: string; asset: { _ref: string; _type: string } }) => (
+                    <SanityImage
+                      key={badge._key}
+                      image={badge as import("@/components/ui/SanityImage/types").SanityImageSource}
+                      width={400}
+                      height={70}
+                      className="h-auto w-full rounded-md"
+                    />
+                  ))}
+                </div>
+              )}
+
+              {attorney.superLawyersUrl && (
+                <SuperLawyersBadge
+                  profileUrl={attorney.superLawyersUrl}
+                  name={attorney.name}
+                />
               )}
 
               <div className="mt-[22px] flex flex-col gap-3">
