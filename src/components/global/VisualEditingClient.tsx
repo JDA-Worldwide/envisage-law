@@ -5,10 +5,10 @@ import { VisualEditing } from "next-sanity/visual-editing";
 /**
  * Wrapper around VisualEditing for the Presentation tool.
  *
- * Rendered only in draft mode (when SanityLive is NOT active)
- * so there's no double-refresh conflict. Uses the default refresh
- * handler which calls router.refresh() to show live draft changes.
+ * SanityLive already handles content refresh via its subscription,
+ * so we disable VisualEditing's built-in router.refresh() to prevent
+ * a double-refresh on every keystroke in the Studio.
  */
 export default function VisualEditingClient() {
-  return <VisualEditing />;
+  return <VisualEditing refresh={() => ({ update: () => {} })} />;
 }
