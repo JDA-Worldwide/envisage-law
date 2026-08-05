@@ -10,5 +10,5 @@ import { VisualEditing } from "next-sanity/visual-editing";
  * a double-refresh on every keystroke in the Studio.
  */
 export default function VisualEditingClient() {
-  return <VisualEditing refresh={() => ({ update: () => {} })} />;
+  return <VisualEditing refresh={() => false} />;
 }
