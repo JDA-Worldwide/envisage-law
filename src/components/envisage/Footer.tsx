@@ -84,6 +84,9 @@ const PLATFORM_LABELS: Record<string, string> = {
 
 export default function Footer({ footer, settings, practiceAreas, isPreview = false }: FooterProps) {
   const year = new Date().getFullYear();
+  // Live preview refreshes the router on every edit, which re-prefetches every
+  // link in the DOM. Skip prefetching entirely while editing.
+  const prefetch = isPreview ? false : undefined;
   const phone = stegaClean(settings?.phone) || "919.268.8998";
   const phoneTel = phone.replace(/[^\d]/g, "");
   const address = stegaClean(settings?.mailingAddress) || "Envisage Law\nPO Box 30099\nRaleigh, North Carolina 27622";
@@ -154,7 +157,7 @@ export default function Footer({ footer, settings, practiceAreas, isPreview = fa
             <ul className="flex flex-col gap-[11px]">
               {practiceAreas.map((p) => (
                 <li key={p._id}>
-                  <Link href={`/practice-areas/${p.slug}`} className="text-sm text-white/80 transition-colors hover:text-white">
+                  <Link href={`/practice-areas/${p.slug}`} prefetch={prefetch} className="text-sm text-white/80 transition-colors hover:text-white">
                     {p.title}
                   </Link>
                 </li>
@@ -168,7 +171,7 @@ export default function Footer({ footer, settings, practiceAreas, isPreview = fa
             <ul className="flex flex-col gap-[11px]">
               {firmLinks.map((link) => (
                 <li key={link._key}>
-                  <Link href={link.href} className="text-sm text-white/80 transition-colors hover:text-white">
+                  <Link href={link.href} prefetch={prefetch} className="text-sm text-white/80 transition-colors hover:text-white">
                     {link.label}
                   </Link>
                 </li>
@@ -208,8 +211,8 @@ export default function Footer({ footer, settings, practiceAreas, isPreview = fa
         <div className="flex flex-wrap items-center justify-between gap-5 py-7 text-[13px] text-white/75">
           <span>
             © {year} {copyrightText} ·{" "}
-            <Link href="/privacy-policy" className="underline hover:text-white/80">Privacy Policy</Link> ·{" "}
-            <Link href="/terms-of-use" className="underline hover:text-white/80">Terms of Use</Link>
+            <Link href="/privacy-policy" prefetch={prefetch} className="underline hover:text-white/80">Privacy Policy</Link> ·{" "}
+            <Link href="/terms-of-use" prefetch={prefetch} className="underline hover:text-white/80">Terms of Use</Link>
           </span>
           {disclaimerText && (
             <span className="max-w-[720px] leading-[1.6]">

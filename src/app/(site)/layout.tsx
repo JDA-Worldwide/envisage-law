@@ -3,7 +3,9 @@ import { draftMode } from "next/headers";
 import Navigation from "@/components/envisage/Navigation";
 import Footer from "@/components/envisage/Footer";
 import CookieConsent from "@/components/global/CookieConsent";
-import { sanityFetch } from "@/sanity/lib/live";
+import { PreviewProvider } from "@/components/global/PreviewContext";
+import VisualEditingClient from "@/components/global/VisualEditingClient";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import {
   settingsQuery,
   allPracticeAreasQuery,
@@ -35,7 +37,7 @@ export default async function SiteLayout({
   ]);
 
   return (
-    <>
+    <PreviewProvider isPreview={isDraftMode}>
       <Navigation nav={nav} practiceAreas={practiceAreas ?? []} />
       <main id="main-content">{children}</main>
       <Footer
@@ -45,6 +47,12 @@ export default async function SiteLayout({
         isPreview={isDraftMode}
       />
       <CookieConsent message={cookieMessage} />
-    </>
+      {isDraftMode && (
+        <>
+          <SanityLive />
+          <VisualEditingClient />
+        </>
+      )}
+    </PreviewProvider>
   );
 }
