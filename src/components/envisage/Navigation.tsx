@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useIsPreview } from "@/components/global/PreviewContext";
 import { cn } from "@/lib/utils";
 
 interface NavItemData {
@@ -72,6 +73,9 @@ export default function Navigation({ nav, practiceAreas }: NavigationProps) {
           : item
       );
   const pathname = usePathname();
+  // Live preview refreshes the router on every edit, which re-prefetches every
+  // link in the DOM. Skip prefetching entirely while editing.
+  const prefetch = useIsPreview() ? false : undefined;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuPathname, setMenuPathname] = useState(pathname);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -101,7 +105,7 @@ export default function Navigation({ nav, practiceAreas }: NavigationProps) {
         className="mx-auto flex w-full max-w-content items-center justify-between px-4 sm:px-6 lg:px-8"
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center transition-opacity hover:opacity-80" aria-label="Envisage Law home">
+        <Link href="/" prefetch={prefetch} className="flex items-center transition-opacity hover:opacity-80" aria-label="Envisage Law home">
           <Image src={LOGO_URL} alt="Envisage Law" width={180} height={24} className="h-[24px] w-auto" priority />
         </Link>
 
@@ -114,6 +118,7 @@ export default function Navigation({ nav, practiceAreas }: NavigationProps) {
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={prefetch}
                 className={cn(
                   "relative whitespace-nowrap px-4 py-2.5 text-[14.5px] font-semibold tracking-[0.02em] transition-colors",
                   pathname === item.href || pathname.startsWith(item.href + "/")
@@ -130,6 +135,7 @@ export default function Navigation({ nav, practiceAreas }: NavigationProps) {
           )}
           <Link
             href={ctaHref}
+            prefetch={prefetch}
             className="ml-2 inline-flex items-center gap-2.5 whitespace-nowrap rounded-sm bg-brand-secondary-dark px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:bg-brand-secondary-darker"
           >
             {ctaLabel}
@@ -172,6 +178,7 @@ export default function Navigation({ nav, practiceAreas }: NavigationProps) {
             ))}
             <Link
               href={ctaHref}
+              prefetch={prefetch}
               className="mt-2 flex justify-center rounded-sm bg-brand-secondary-dark px-6 py-3.5 text-sm font-bold uppercase tracking-[0.08em] text-white"
             >
               {ctaLabel}
@@ -185,6 +192,7 @@ export default function Navigation({ nav, practiceAreas }: NavigationProps) {
 
 function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string }) {
   const [open, setOpen] = useState(false);
+  const prefetch = useIsPreview() ? false : undefined;
   const ref = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -227,6 +235,7 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
       <div className="relative inline-flex items-center">
         <Link
           href={item.href}
+          prefetch={prefetch}
           className={cn(
             "whitespace-nowrap py-2.5 pl-4 pr-1 text-[14.5px] font-semibold tracking-[0.02em] transition-colors",
             isActive ? "text-white" : "text-white/95 hover:text-white"
@@ -265,6 +274,7 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
         <Link
           href={item.href}
           role="menuitem"
+          prefetch={prefetch}
           className="mb-1 block rounded border-b border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
           onClick={() => setOpen(false)}
         >
@@ -276,6 +286,7 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
               key={child.href}
               href={child.href}
               role="menuitem"
+              prefetch={prefetch}
               className="block rounded px-3.5 py-2.5 text-sm font-semibold text-brand-primary hover:bg-brand-surface hover:text-brand-secondary-dark focus-visible:ring-2 focus-visible:ring-brand-secondary"
               onClick={() => setOpen(false)}
             >
@@ -290,12 +301,14 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
 
 function MobileNavItem({ item, pathname }: { item: NavItemData; pathname: string }) {
   const [open, setOpen] = useState(false);
+  const prefetch = useIsPreview() ? false : undefined;
   const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
 
   if (!item.children) {
     return (
       <Link
         href={item.href}
+        prefetch={prefetch}
         className={cn(
           "block rounded px-4 py-3.5 text-base font-semibold",
           isActive ? "text-white" : "text-white/95"
@@ -328,6 +341,7 @@ function MobileNavItem({ item, pathname }: { item: NavItemData; pathname: string
             <Link
               key={child.href}
               href={child.href}
+              prefetch={prefetch}
               className="block rounded px-4 py-2.5 text-sm text-white/95 hover:bg-white/10 hover:text-white"
             >
               {child.label}

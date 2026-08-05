@@ -3,8 +3,6 @@ import { Montserrat } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { draftMode } from "next/headers";
-import { SanityLive } from "@/sanity/lib/live";
-import VisualEditingClient from "@/components/global/VisualEditingClient";
 import GoogleAnalytics from "@/components/global/GoogleAnalytics";
 import "./globals.css";
 
@@ -42,12 +40,6 @@ export default async function RootLayout({
           Skip to content
         </a>
         {children}
-        {isDraftMode && (
-          <>
-            <SanityLive />
-            <VisualEditingClient />
-          </>
-        )}
         <Analytics />
         <SpeedInsights />
         <GoogleAnalytics disabled={isDraftMode} />
