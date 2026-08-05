@@ -12,6 +12,11 @@ export default async function PracticeAreaGrid({
     query: allPracticeAreasQuery,
   });
 
+  // Litigation is the overarching practice, not a niche — exclude from the grid
+  const niches = (practiceAreas ?? []).filter(
+    (p: { slug: string }) => p.slug !== "litigation"
+  );
+
   return (
     <div className="px-6">
       {(eyebrow || heading || subheading) && (
@@ -34,7 +39,7 @@ export default async function PracticeAreaGrid({
         </div>
       )}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {(practiceAreas ?? []).map(
+        {niches.map(
           (p: { _id: string; slug: string; title: string; icon?: string; standfirst: string }) => (
             <PracticeCard key={p._id} practice={p} />
           )

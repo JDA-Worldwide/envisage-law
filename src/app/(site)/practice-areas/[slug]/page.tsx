@@ -128,36 +128,43 @@ export default async function PracticeAreaPage({ params }: Props) {
         </section>
       )}
 
-      {/* Anchoring Attorney */}
-      {pa.anchoringAttorney && (
+      {/* Anchoring Attorneys */}
+      {pa.anchoringAttorneys?.length > 0 && (
         <section className="border-t border-brand-border bg-brand-surface py-16 lg:py-20">
           <Container>
-            <p className="mb-2 text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">Anchoring Attorney</p>
+            <p className="mb-2 text-[13px] font-bold uppercase tracking-[0.18em] text-brand-secondary-dark">
+              {pa.anchoringAttorneys.length > 1 ? "Anchoring Attorneys" : "Anchoring Attorney"}
+            </p>
             <h2 className="mb-8 text-[clamp(28px,3.5vw,42px)] font-extrabold text-brand-primary">
-              {pa.anchoringHeading || `Led by ${pa.anchoringAttorney.name}`}
+              {pa.anchoringHeading || `Led by ${pa.anchoringAttorneys.map((a: { attorney: { name: string } }) => a.attorney.name).join(" & ")}`}
             </h2>
-            <div className="grid items-center gap-10 rounded-lg border border-brand-border bg-white p-8 md:grid-cols-[180px_1fr]">
-              {pa.anchoringAttorney.photo && (
-                <Link href={`/legal-team/${pa.anchoringAttorney.slug}`} className="aspect-[530/548] overflow-hidden rounded-md bg-brand-primary">
-                  <SanityImage
-                    image={pa.anchoringAttorney.photo}
-                    width={180}
-                    height={186}
-                    className="h-full w-full object-cover"
-                  />
-                </Link>
-              )}
-              <div>
-                <Link href={`/legal-team/${pa.anchoringAttorney.slug}`} className="text-xl font-bold text-brand-primary hover:text-brand-secondary">
-                  {pa.anchoringAttorney.name}
-                </Link>
-                <p className="mt-1 text-sm font-semibold uppercase tracking-wide text-brand-muted">
-                  {pa.anchoringRoleLabel || pa.anchoringAttorney.role}
-                </p>
-                {pa.anchoringDescription && (
-                  <p className="mt-4 text-[15px] leading-[1.65] text-brand-muted">{pa.anchoringDescription}</p>
-                )}
-              </div>
+            <div className="grid gap-6">
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              {pa.anchoringAttorneys.map((entry: any) => (
+                <div key={entry._key} className="grid items-center gap-10 rounded-lg border border-brand-border bg-white p-8 md:grid-cols-[180px_1fr]">
+                  {entry.attorney.photo && (
+                    <Link href={`/legal-team/${entry.attorney.slug}`} className="aspect-[530/548] overflow-hidden rounded-md bg-brand-primary">
+                      <SanityImage
+                        image={entry.attorney.photo}
+                        width={180}
+                        height={186}
+                        className="h-full w-full object-cover"
+                      />
+                    </Link>
+                  )}
+                  <div>
+                    <Link href={`/legal-team/${entry.attorney.slug}`} className="text-xl font-bold text-brand-primary hover:text-brand-secondary">
+                      {entry.attorney.name}
+                    </Link>
+                    <p className="mt-1 text-sm font-semibold uppercase tracking-wide text-brand-muted">
+                      {entry.roleLabel || entry.attorney.role}
+                    </p>
+                    {entry.description && (
+                      <p className="mt-4 text-[15px] leading-[1.65] text-brand-muted">{entry.description}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </Container>
         </section>

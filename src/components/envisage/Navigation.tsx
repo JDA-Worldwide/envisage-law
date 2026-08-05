@@ -271,29 +271,42 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
           open ? "visible translate-y-0 opacity-100" : "invisible translate-y-2 opacity-0"
         )}
       >
+        {item.children?.some((c) => c.href === "/practice-areas/litigation") && (
+          <Link
+            href="/practice-areas/litigation"
+            role="menuitem"
+            prefetch={prefetch}
+            className="mb-1 block w-full rounded border-b border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
+            onClick={() => setOpen(false)}
+          >
+            Litigation
+          </Link>
+        )}
+        <div className="grid grid-cols-2 gap-x-1">
+          {item.children
+            ?.filter((child) => child.href !== "/practice-areas/litigation")
+            .map((child) => (
+              <Link
+                key={child.href}
+                href={child.href}
+                role="menuitem"
+                prefetch={prefetch}
+                className="block rounded px-3.5 py-2.5 text-sm font-semibold text-brand-primary hover:bg-brand-surface hover:text-brand-secondary-dark focus-visible:ring-2 focus-visible:ring-brand-secondary"
+                onClick={() => setOpen(false)}
+              >
+                {child.label}
+              </Link>
+            ))}
+        </div>
         <Link
           href={item.href}
           role="menuitem"
           prefetch={prefetch}
-          className="mb-1 block rounded border-b border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
+          className="mt-1 block w-full rounded border-t border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
           onClick={() => setOpen(false)}
         >
           All Practice Areas
         </Link>
-        <div className="grid grid-cols-2 gap-x-1">
-          {item.children?.map((child) => (
-            <Link
-              key={child.href}
-              href={child.href}
-              role="menuitem"
-              prefetch={prefetch}
-              className="block rounded px-3.5 py-2.5 text-sm font-semibold text-brand-primary hover:bg-brand-surface hover:text-brand-secondary-dark focus-visible:ring-2 focus-visible:ring-brand-secondary"
-              onClick={() => setOpen(false)}
-            >
-              {child.label}
-            </Link>
-          ))}
-        </div>
       </div>
     </div>
   );
