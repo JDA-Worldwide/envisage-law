@@ -48,6 +48,8 @@ export const navigationQuery = groq`
       label,
       href,
       autoPopulateChildren,
+      dropdownHeaderLink { label, href },
+      dropdownFooterLink { label, href },
       children[] {
         _key,
         label,

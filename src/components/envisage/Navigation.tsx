@@ -11,6 +11,13 @@ interface NavItemData {
   label: string;
   href: string;
   children?: { label: string; href: string; description?: string }[];
+  dropdownHeaderLink?: DropdownLink;
+  dropdownFooterLink?: DropdownLink;
+}
+
+interface DropdownLink {
+  label: string;
+  href: string;
 }
 
 interface SanityNavItem {
@@ -18,6 +25,8 @@ interface SanityNavItem {
   label: string;
   href: string;
   autoPopulateChildren?: boolean;
+  dropdownHeaderLink?: DropdownLink;
+  dropdownFooterLink?: DropdownLink;
   children?: { _key: string; label: string; href: string }[];
 }
 
@@ -54,6 +63,8 @@ export default function Navigation({ nav, practiceAreas }: NavigationProps) {
     ? nav.items.map((item) => ({
         label: item.label,
         href: item.href,
+        dropdownHeaderLink: item.dropdownHeaderLink,
+        dropdownFooterLink: item.dropdownFooterLink,
         children: item.autoPopulateChildren
           ? practiceAreas.map((p) => ({
               label: p.title,
@@ -271,20 +282,20 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
           open ? "visible translate-y-0 opacity-100" : "invisible translate-y-2 opacity-0"
         )}
       >
-        {item.children?.some((c) => c.href === "/practice-areas/litigation") && (
+        {item.dropdownHeaderLink && (
           <Link
-            href="/practice-areas/litigation"
+            href={item.dropdownHeaderLink.href}
             role="menuitem"
             prefetch={prefetch}
             className="mb-1 block w-full rounded border-b border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
             onClick={() => setOpen(false)}
           >
-            Litigation
+            {item.dropdownHeaderLink.label}
           </Link>
         )}
         <div className="grid grid-cols-2 gap-x-1">
           {item.children
-            ?.filter((child) => child.href !== "/practice-areas/litigation")
+            ?.filter((child) => child.href !== item.dropdownHeaderLink?.href)
             .map((child) => (
               <Link
                 key={child.href}
@@ -298,15 +309,17 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
               </Link>
             ))}
         </div>
-        <Link
-          href={item.href}
-          role="menuitem"
-          prefetch={prefetch}
-          className="mt-1 block w-full rounded border-t border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
-          onClick={() => setOpen(false)}
-        >
-          All Practice Areas
-        </Link>
+        {item.dropdownFooterLink && (
+          <Link
+            href={item.dropdownFooterLink.href}
+            role="menuitem"
+            prefetch={prefetch}
+            className="mt-1 block w-full rounded border-t border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
+            onClick={() => setOpen(false)}
+          >
+            {item.dropdownFooterLink.label}
+          </Link>
+        )}
       </div>
     </div>
   );
