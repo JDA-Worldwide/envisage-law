@@ -363,16 +363,36 @@ function MobileNavItem({ item, pathname }: { item: NavItemData; pathname: string
       </button>
       {open && (
         <div className="ml-4 mt-1 space-y-1 rounded bg-white/[0.06]">
-          {item.children.map((child) => (
+          {item.dropdownHeaderLink && (
             <Link
-              key={child.href}
-              href={child.href}
+              href={item.dropdownHeaderLink.href}
               prefetch={prefetch}
-              className="block rounded px-4 py-2.5 text-sm text-white/95 hover:bg-white/10 hover:text-white"
+              className="block rounded border-b border-white/10 px-4 py-2.5 text-sm font-bold text-white hover:bg-white/10"
             >
-              {child.label}
+              {item.dropdownHeaderLink.label}
             </Link>
-          ))}
+          )}
+          {item.children
+            ?.filter((child) => child.href !== item.dropdownHeaderLink?.href)
+            .map((child) => (
+              <Link
+                key={child.href}
+                href={child.href}
+                prefetch={prefetch}
+                className="block rounded px-4 py-2.5 text-sm text-white/95 hover:bg-white/10 hover:text-white"
+              >
+                {child.label}
+              </Link>
+            ))}
+          {item.dropdownFooterLink && (
+            <Link
+              href={item.dropdownFooterLink.href}
+              prefetch={prefetch}
+              className="block rounded border-t border-white/10 px-4 py-2.5 text-sm font-bold text-white hover:bg-white/10"
+            >
+              {item.dropdownFooterLink.label}
+            </Link>
+          )}
         </div>
       )}
     </div>
