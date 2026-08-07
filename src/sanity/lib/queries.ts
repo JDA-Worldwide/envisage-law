@@ -98,6 +98,10 @@ export const pageBySlugQuery = groq`
         ...,
         ${ctasProjection}
       },
+      _type == "practiceAreaGrid" => {
+        ...,
+        ${ctasProjection}
+      },
       _type == "anchoringAttorneyBand" => {
         ...,
         attorney-> {
@@ -122,6 +126,10 @@ export const homepageQuery = groq`
     modules[] {
       ...,
       _type == "richTextSection" => {
+        ...,
+        ${ctasProjection}
+      },
+      _type == "practiceAreaGrid" => {
         ...,
         ${ctasProjection}
       },

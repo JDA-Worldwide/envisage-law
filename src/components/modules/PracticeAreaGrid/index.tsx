@@ -1,12 +1,14 @@
 import { sanityFetch } from "@/sanity/lib/live";
 import { allPracticeAreasQuery } from "@/sanity/lib/queries";
 import PracticeCard from "@/components/envisage/PracticeCard";
+import CtaButtons from "@/components/ui/CtaButtons";
 import type { PracticeAreaGridProps } from "./types";
 
 export default async function PracticeAreaGrid({
   heading,
   subheading,
   eyebrow,
+  ctas,
 }: PracticeAreaGridProps) {
   const { data: practiceAreas } = await sanityFetch({
     query: allPracticeAreasQuery,
@@ -36,6 +38,7 @@ export default async function PracticeAreaGrid({
               {subheading}
             </p>
           )}
+          <CtaButtons ctas={ctas} className="mt-8 justify-center" />
         </div>
       )}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
