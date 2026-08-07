@@ -48,6 +48,8 @@ export const navigationQuery = groq`
       label,
       href,
       autoPopulateChildren,
+      dropdownHeaderLink { label, href },
+      dropdownFooterLink { label, href },
       children[] {
         _key,
         label,
@@ -92,6 +94,10 @@ export const pageBySlugQuery = groq`
     seo,
     modules[] {
       ...,
+      _type == "richTextSection" => {
+        ...,
+        ${ctasProjection}
+      },
       _type == "anchoringAttorneyBand" => {
         ...,
         attorney-> {
@@ -115,6 +121,10 @@ export const homepageQuery = groq`
     seo,
     modules[] {
       ...,
+      _type == "richTextSection" => {
+        ...,
+        ${ctasProjection}
+      },
       _type == "anchoringAttorneyBand" => {
         ...,
         attorney-> {
@@ -215,18 +225,19 @@ export const practiceAreaBySlugQuery = groq`
     body,
     capabilities,
     featuredCapability,
-    anchoringAttorney-> {
-      _id,
-      name,
-      "slug": slug.current,
-      role,
-      photo,
-      email,
-      phone
-    },
     anchoringHeading,
-    anchoringRoleLabel,
-    anchoringDescription,
+    anchoringAttorneys[] {
+      _key,
+      attorney-> {
+        _id,
+        name,
+        "slug": slug.current,
+        role,
+        photo
+      },
+      roleLabel,
+      description
+    },
     ctaHeading,
     seo
   }

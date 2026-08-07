@@ -35,6 +35,28 @@ export default defineType({
               initialValue: false,
             }),
             defineField({
+              name: "dropdownHeaderLink",
+              title: "Dropdown Header Link",
+              type: "object",
+              description: "Full-width link pinned to the top of the dropdown (e.g. Litigation)",
+              fields: [
+                defineField({ name: "label", title: "Label", type: "string", validation: (rule) => rule.required() }),
+                defineField({ name: "href", title: "URL", type: "string", validation: (rule) => rule.required() }),
+              ],
+              hidden: ({ parent }) => !parent?.autoPopulateChildren,
+            }),
+            defineField({
+              name: "dropdownFooterLink",
+              title: "Dropdown Footer Link",
+              type: "object",
+              description: "Full-width link pinned to the bottom of the dropdown (e.g. All Practice Areas)",
+              fields: [
+                defineField({ name: "label", title: "Label", type: "string", validation: (rule) => rule.required() }),
+                defineField({ name: "href", title: "URL", type: "string", validation: (rule) => rule.required() }),
+              ],
+              hidden: ({ parent }) => !parent?.autoPopulateChildren,
+            }),
+            defineField({
               name: "children",
               title: "Dropdown Items",
               type: "array",

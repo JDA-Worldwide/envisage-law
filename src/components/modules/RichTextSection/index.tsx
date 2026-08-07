@@ -1,11 +1,13 @@
 import { stegaClean } from "@sanity/client/stega";
 import PortableText from "@/components/ui/PortableText";
+import CtaButtons from "@/components/ui/CtaButtons";
 import type { RichTextSectionProps } from "./types";
 
 export default function RichTextSection({
   eyebrow,
   heading,
   body,
+  ctas,
   alignment,
 }: RichTextSectionProps) {
   const centered = stegaClean(alignment) === "center";
@@ -27,6 +29,7 @@ export default function RichTextSection({
           <PortableText value={body} />
         </div>
       )}
+      <CtaButtons ctas={ctas} className="mt-8" />
     </div>
   );
 }

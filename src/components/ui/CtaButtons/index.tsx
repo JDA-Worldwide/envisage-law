@@ -41,7 +41,7 @@ export default function CtaButtons({ ctas, className, ...divProps }: CtaButtonsP
             target={cta.isExternal ? "_blank" : undefined}
             rel={cta.isExternal ? "noopener noreferrer" : undefined}
             className={cn(
-              "inline-block rounded-button px-5 py-3 text-base font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2",
+              "inline-flex items-center rounded-sm px-[30px] py-[15px] text-sm font-bold uppercase tracking-[0.08em] transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2",
               variantClasses[variant] ?? variantClasses.primary
             )}
           >

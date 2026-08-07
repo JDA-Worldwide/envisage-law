@@ -11,6 +11,13 @@ interface NavItemData {
   label: string;
   href: string;
   children?: { label: string; href: string; description?: string }[];
+  dropdownHeaderLink?: DropdownLink;
+  dropdownFooterLink?: DropdownLink;
+}
+
+interface DropdownLink {
+  label: string;
+  href: string;
 }
 
 interface SanityNavItem {
@@ -18,6 +25,8 @@ interface SanityNavItem {
   label: string;
   href: string;
   autoPopulateChildren?: boolean;
+  dropdownHeaderLink?: DropdownLink;
+  dropdownFooterLink?: DropdownLink;
   children?: { _key: string; label: string; href: string }[];
 }
 
@@ -54,6 +63,8 @@ export default function Navigation({ nav, practiceAreas }: NavigationProps) {
     ? nav.items.map((item) => ({
         label: item.label,
         href: item.href,
+        dropdownHeaderLink: item.dropdownHeaderLink,
+        dropdownFooterLink: item.dropdownFooterLink,
         children: item.autoPopulateChildren
           ? practiceAreas.map((p) => ({
               label: p.title,
@@ -271,29 +282,44 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
           open ? "visible translate-y-0 opacity-100" : "invisible translate-y-2 opacity-0"
         )}
       >
-        <Link
-          href={item.href}
-          role="menuitem"
-          prefetch={prefetch}
-          className="mb-1 block rounded border-b border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
-          onClick={() => setOpen(false)}
-        >
-          All Practice Areas
-        </Link>
+        {item.dropdownHeaderLink && (
+          <Link
+            href={item.dropdownHeaderLink.href}
+            role="menuitem"
+            prefetch={prefetch}
+            className="mb-1 block w-full rounded border-b border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
+            onClick={() => setOpen(false)}
+          >
+            {item.dropdownHeaderLink.label}
+          </Link>
+        )}
         <div className="grid grid-cols-2 gap-x-1">
-          {item.children?.map((child) => (
-            <Link
-              key={child.href}
-              href={child.href}
-              role="menuitem"
-              prefetch={prefetch}
-              className="block rounded px-3.5 py-2.5 text-sm font-semibold text-brand-primary hover:bg-brand-surface hover:text-brand-secondary-dark focus-visible:ring-2 focus-visible:ring-brand-secondary"
-              onClick={() => setOpen(false)}
-            >
-              {child.label}
-            </Link>
-          ))}
+          {item.children
+            ?.filter((child) => child.href !== item.dropdownHeaderLink?.href)
+            .map((child) => (
+              <Link
+                key={child.href}
+                href={child.href}
+                role="menuitem"
+                prefetch={prefetch}
+                className="block rounded px-3.5 py-2.5 text-sm font-semibold text-brand-primary hover:bg-brand-surface hover:text-brand-secondary-dark focus-visible:ring-2 focus-visible:ring-brand-secondary"
+                onClick={() => setOpen(false)}
+              >
+                {child.label}
+              </Link>
+            ))}
         </div>
+        {item.dropdownFooterLink && (
+          <Link
+            href={item.dropdownFooterLink.href}
+            role="menuitem"
+            prefetch={prefetch}
+            className="mt-1 block w-full rounded border-t border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
+            onClick={() => setOpen(false)}
+          >
+            {item.dropdownFooterLink.label}
+          </Link>
+        )}
       </div>
     </div>
   );
@@ -337,16 +363,36 @@ function MobileNavItem({ item, pathname }: { item: NavItemData; pathname: string
       </button>
       {open && (
         <div className="ml-4 mt-1 space-y-1 rounded bg-white/[0.06]">
-          {item.children.map((child) => (
+          {item.dropdownHeaderLink && (
             <Link
-              key={child.href}
-              href={child.href}
+              href={item.dropdownHeaderLink.href}
               prefetch={prefetch}
-              className="block rounded px-4 py-2.5 text-sm text-white/95 hover:bg-white/10 hover:text-white"
+              className="block rounded border-b border-white/10 px-4 py-2.5 text-sm font-bold text-white hover:bg-white/10"
             >
-              {child.label}
+              {item.dropdownHeaderLink.label}
             </Link>
-          ))}
+          )}
+          {item.children
+            ?.filter((child) => child.href !== item.dropdownHeaderLink?.href)
+            .map((child) => (
+              <Link
+                key={child.href}
+                href={child.href}
+                prefetch={prefetch}
+                className="block rounded px-4 py-2.5 text-sm text-white/95 hover:bg-white/10 hover:text-white"
+              >
+                {child.label}
+              </Link>
+            ))}
+          {item.dropdownFooterLink && (
+            <Link
+              href={item.dropdownFooterLink.href}
+              prefetch={prefetch}
+              className="block rounded border-t border-white/10 px-4 py-2.5 text-sm font-bold text-white hover:bg-white/10"
+            >
+              {item.dropdownFooterLink.label}
+            </Link>
+          )}
         </div>
       )}
     </div>

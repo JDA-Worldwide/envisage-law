@@ -1,4 +1,4 @@
-import { defineType, defineField } from "sanity";
+import { defineType, defineField, defineArrayMember } from "sanity";
 import { orderRankField } from "@sanity/orderable-document-list";
 import { isUnique } from "@/sanity/lib/isUnique";
 
@@ -99,12 +99,6 @@ export default defineType({
       ],
     }),
     defineField({
-      name: "anchoringAttorney",
-      title: "Anchoring Attorney",
-      type: "reference",
-      to: [{ type: "attorney" }],
-    }),
-    defineField({
       name: "anchoringHeading",
       title: "Anchoring Section Heading",
       type: "string",
@@ -112,18 +106,41 @@ export default defineType({
         "e.g. 'Led by a Board-Certified Trademark Specialist'",
     }),
     defineField({
-      name: "anchoringRoleLabel",
-      title: "Anchoring Attorney Role Label",
-      type: "string",
-      description:
-        "Custom role line for this context, e.g. 'Partner · NC Board Certified Specialist, Trademark Law'",
-    }),
-    defineField({
-      name: "anchoringDescription",
-      title: "Anchoring Attorney Description",
-      type: "text",
-      rows: 4,
-      description: "Practice-specific description of the anchoring attorney",
+      name: "anchoringAttorneys",
+      title: "Anchoring Attorneys",
+      type: "array",
+      description: "One or more attorneys who anchor this practice area",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "attorney",
+              title: "Attorney",
+              type: "reference",
+              to: [{ type: "attorney" }],
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "roleLabel",
+              title: "Role Label Override",
+              type: "string",
+              description:
+                "Custom role line for this context, e.g. 'Partner · NC Board Certified Specialist, Trademark Law'",
+            }),
+            defineField({
+              name: "description",
+              title: "Description",
+              type: "text",
+              rows: 4,
+              description: "Practice-specific description of this attorney",
+            }),
+          ],
+          preview: {
+            select: { title: "attorney.name", subtitle: "roleLabel" },
+          },
+        }),
+      ],
     }),
     defineField({
       name: "ctaHeading",

@@ -24,6 +24,12 @@ export default defineType({
       of: [{ type: "block" }],
     }),
     defineField({
+      name: "ctas",
+      title: "Call-to-Action Buttons",
+      type: "array",
+      of: [{ type: "ctaButton" }],
+    }),
+    defineField({
       name: "alignment",
       title: "Alignment",
       type: "string",
