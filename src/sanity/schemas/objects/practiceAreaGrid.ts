@@ -23,6 +23,12 @@ export default defineType({
       type: "text",
       rows: 2,
     }),
+    defineField({
+      name: "ctas",
+      title: "CTA Buttons",
+      type: "array",
+      of: [{ type: "ctaButton" }],
+    }),
     colorSchemeField,
     anchorSlugField,
   ],

@@ -287,7 +287,7 @@ function DropdownItem({ item, pathname }: { item: NavItemData; pathname: string 
             href={item.dropdownHeaderLink.href}
             role="menuitem"
             prefetch={prefetch}
-            className="mb-1 block w-full rounded border-b border-brand-border px-3.5 py-2.5 text-sm font-bold text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
+            className="mb-1 block w-full rounded border-b border-brand-border px-3.5 py-2.5 text-center text-base font-bold uppercase text-brand-secondary-dark hover:bg-brand-surface focus-visible:ring-2 focus-visible:ring-brand-secondary"
             onClick={() => setOpen(false)}
           >
             {item.dropdownHeaderLink.label}
