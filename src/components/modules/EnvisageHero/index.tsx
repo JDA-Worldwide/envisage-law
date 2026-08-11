@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { stegaClean } from "@sanity/client/stega";
 import { PortableText, type PortableTextComponents, type PortableTextBlock } from "@portabletext/react";
@@ -25,18 +26,18 @@ export default function EnvisageHero({
   backgroundImage,
   isHome,
 }: EnvisageHeroProps) {
-  const bgUrl = backgroundImage?.asset
-    ? urlFor(backgroundImage).width(2400).quality(80).auto("format").url()
-    : "";
-
   return (
     <section
       className={`relative flex items-center overflow-hidden bg-brand-primary text-white ${isHome ? "min-h-[520px] py-24" : "py-24 pb-20"}`}
     >
-      {bgUrl && (
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${bgUrl}')` }}
+      {backgroundImage?.asset && (
+        <Image
+          src={urlFor(backgroundImage).width(2400).quality(80).auto("format").url()}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="absolute inset-0 z-0 object-cover object-center"
         />
       )}
       <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[rgba(0,18,42,0.96)] via-[rgba(0,31,70,0.92)] to-[rgba(3,42,92,0.84)]" />

@@ -153,7 +153,7 @@ export default function Footer({ footer, settings, practiceAreas, isPreview = fa
 
           {/* Practice Areas */}
           <div>
-            <h4 className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.1em] text-white">Practice Areas</h4>
+            <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.1em] text-white">Practice Areas</p>
             <ul className="flex flex-col gap-[11px]">
               {practiceAreas.map((p) => (
                 <li key={p._id}>
@@ -167,7 +167,7 @@ export default function Footer({ footer, settings, practiceAreas, isPreview = fa
 
           {/* Firm */}
           <div>
-            <h4 className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.1em] text-white">Firm</h4>
+            <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.1em] text-white">Firm</p>
             <ul className="flex flex-col gap-[11px]">
               {firmLinks.map((link) => (
                 <li key={link._key}>
@@ -181,7 +181,7 @@ export default function Footer({ footer, settings, practiceAreas, isPreview = fa
 
           {/* Contact */}
           <div>
-            <h4 className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.1em] text-white">Get in touch</h4>
+            <p className="mb-[18px] text-[13px] font-bold uppercase tracking-[0.1em] text-white">Get in touch</p>
             <p className="text-sm leading-[1.7] text-white/80">
               {address.split("\n").map((line, i) => (
                 <span key={i}>{line}<br /></span>
