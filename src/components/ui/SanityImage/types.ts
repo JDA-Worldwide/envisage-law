@@ -26,5 +26,6 @@ export interface SanityImageProps {
   sizes?: string;
   className?: string;
   priority?: boolean;
+  fetchPriority?: "high" | "low" | "auto";
   fill?: boolean;
 }

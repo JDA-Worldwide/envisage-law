@@ -17,6 +17,7 @@ export default function Hero({
             image={backgroundImage}
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             className="h-full w-full"
           />

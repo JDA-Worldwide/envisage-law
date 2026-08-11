@@ -10,6 +10,7 @@ export default function SanityImage({
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
   className,
   priority = false,
+  fetchPriority,
   fill = false,
 }: SanityImageProps) {
   if (!image?.asset) return null;
@@ -28,6 +29,7 @@ export default function SanityImage({
       height={fill ? undefined : height}
       sizes={sizes}
       priority={priority}
+      fetchPriority={fetchPriority ?? (priority ? "high" : undefined)}
       fill={fill}
       className={cn("object-cover", className)}
       style={{ objectPosition }}

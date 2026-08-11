@@ -36,6 +36,7 @@ export default function EnvisageHero({
           alt=""
           fill
           priority
+          fetchPriority="high"
           sizes="100vw"
           className="absolute inset-0 z-0 object-cover object-center"
         />
