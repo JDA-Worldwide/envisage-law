@@ -203,7 +203,7 @@ export default defineType({
       name: "badges",
       title: "Badges & Certifications",
       type: "array",
-      description: "Certification or recognition badge images (e.g. Board Certified Specialist, Super Lawyers)",
+      description: "Certification or recognition badge images (e.g. Board Certified Specialist, etc.)",
       of: [
         defineArrayMember({
           type: "image",
@@ -213,6 +213,13 @@ export default defineType({
               title: "Alt Text",
               type: "string",
               validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "url",
+              title: "Link URL",
+              type: "url",
+              description:
+                "Optional. If set, the badge opens this URL in a new window.",
             }),
           ],
         }),

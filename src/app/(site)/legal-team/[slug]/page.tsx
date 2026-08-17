@@ -101,15 +101,32 @@ export default async function AttorneyPage({ params }: Props) {
 
               {attorney.badges?.length > 0 && (
                 <div className="mt-[22px] flex flex-col gap-3">
-                  {attorney.badges.map((badge: { _key: string; _type: string; alt: string; asset: { _ref: string; _type: string } }) => (
-                    <SanityImage
-                      key={badge._key}
-                      image={badge as import("@/components/ui/SanityImage/types").SanityImageSource}
-                      width={400}
-                      height={70}
-                      className="h-auto w-full rounded-md"
-                    />
-                  ))}
+                  {attorney.badges.map((badge: { _key: string; _type: string; alt: string; url?: string; asset: { _ref: string; _type: string } }) => {
+                    const image = (
+                      <SanityImage
+                        image={badge as import("@/components/ui/SanityImage/types").SanityImageSource}
+                        width={400}
+                        height={70}
+                        className="h-auto w-full rounded-md"
+                      />
+                    );
+                    const href = badge.url ? stegaClean(badge.url) : "";
+                    if (!href) {
+                      return <div key={badge._key}>{image}</div>;
+                    }
+                    return (
+                      <a
+                        key={badge._key}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block rounded-md transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
+                      >
+                        {image}
+                        <span className="sr-only"> (opens in new tab)</span>
+                      </a>
+                    );
+                  })}
                 </div>
               )}
 
