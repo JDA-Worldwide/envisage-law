@@ -8,11 +8,21 @@ interface SuperLawyersBadgeProps {
   name: string;
 }
 
+/**
+ * Super Lawyers' badge script concatenates `&utm_medium={hostname}` onto
+ * the profile href. Without an existing `?`, that `&` becomes part of the
+ * path and the profile 404s.
+ */
+function hrefForSuperLawyersWidget(url: string): string {
+  const cleaned = stegaClean(url).trim().split("#")[0];
+  return cleaned.includes("?") ? cleaned : `${cleaned}?utm_source=badge`;
+}
+
 export default function SuperLawyersBadge({
   profileUrl,
   name,
 }: SuperLawyersBadgeProps) {
-  const cleanUrl = stegaClean(profileUrl);
+  const widgetHref = hrefForSuperLawyersWidget(profileUrl);
 
   return (
     <div
@@ -26,7 +36,7 @@ export default function SuperLawyersBadge({
       />
       <a
         className="slbadge_profileurl"
-        href={cleanUrl}
+        href={widgetHref}
         target="_blank"
         rel="noopener noreferrer"
         title={`View the Super Lawyers profile of ${name}`}
