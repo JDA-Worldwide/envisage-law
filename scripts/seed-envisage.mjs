@@ -582,13 +582,15 @@ async function main() {
           _key: key(),
           _type: section._type,
           title: section.title,
-          ...(section.items && { items: section.items }),
+          ...(section.items && {
+            items: section.items.map((text) => block(text)),
+          }),
           ...(section.entries && {
             entries: section.entries.map((e) => ({
               _key: key(),
               _type: "object",
               label: e.label,
-              value: e.value,
+              value: [block(e.value)],
             })),
           }),
         })),

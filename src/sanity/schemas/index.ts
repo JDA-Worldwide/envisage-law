@@ -38,6 +38,7 @@ import insightsGrid from "./objects/insightsGrid";
 import recognitionBand from "./objects/recognitionBand";
 import locationGrid from "./objects/locationGrid";
 import imageBand from "./objects/imageBand";
+import simpleRichText from "./objects/simpleRichText";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Documents
@@ -78,4 +79,5 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   recognitionBand,
   locationGrid,
   imageBand,
+  simpleRichText,
 ];

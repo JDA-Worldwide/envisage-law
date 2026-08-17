@@ -190,7 +190,7 @@ export default async function AttorneyPage({ params }: Props) {
                 </div>
               )}
 
-              {attorney.profileSections?.map((section: { _key: string; _type: string; title: string; items?: string[]; entries?: { _key: string; label: string; value: string }[] }) => (
+              {attorney.profileSections?.map((section: { _key: string; _type: string; title: string; items?: { _key: string }[]; entries?: { _key: string; label: string; value: unknown[] }[] }) => (
                 <div key={section._key} className="border-t border-brand-border py-8">
                   <h2 className="mb-[18px] text-[22px] font-extrabold text-brand-primary">{section.title}</h2>
                   {section._type === "keyValueList" && section.entries && (
@@ -198,17 +198,19 @@ export default async function AttorneyPage({ params }: Props) {
                       {section.entries.map((entry) => (
                         <div key={entry._key} className="flex flex-col gap-1.5 border-b border-brand-border py-3.5 last:border-b-0">
                           <dt className="text-[13px] font-bold tracking-[0.02em] text-brand-primary">{entry.label}</dt>
-                          <dd className="text-[15px] leading-[1.55] text-brand-muted">{entry.value}</dd>
+                          <dd className="text-[15px] leading-[1.55] text-brand-muted">
+                            <PortableText value={entry.value} variant="inline" />
+                          </dd>
                         </div>
                       ))}
                     </dl>
                   )}
                   {section._type === "bulletList" && section.items && (
                     <ul className="flex flex-col gap-3">
-                      {section.items.map((item, i) => (
-                        <li key={i} className="flex gap-3 text-[15.5px] leading-[1.55] text-[#2a3346]">
+                      {section.items.map((item) => (
+                        <li key={item._key} className="flex gap-3 text-[15.5px] leading-[1.55] text-[#2a3346]">
                           <span className="mt-[9px] h-1.5 w-1.5 flex-none rounded-full bg-brand-secondary" />
-                          {item}
+                          <PortableText value={[item]} variant="inline" />
                         </li>
                       ))}
                     </ul>

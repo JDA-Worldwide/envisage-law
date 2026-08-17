@@ -5,7 +5,26 @@ import {
 import SanityImage from "@/components/ui/SanityImage";
 import type { SanityImageSource } from "@/components/ui/SanityImage/types";
 
-const components: Partial<PortableTextReactComponents> = {
+const marks: PortableTextReactComponents["marks"] = {
+  strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+  em: ({ children }) => <em className="italic">{children}</em>,
+  link: ({ children, value }) => {
+    const target = value?.blank ? "_blank" : undefined;
+    const rel = value?.blank ? "noopener noreferrer" : undefined;
+    return (
+      <a
+        href={value?.href}
+        target={target}
+        rel={rel}
+        className="text-brand-secondary underline hover:no-underline"
+      >
+        {children}
+      </a>
+    );
+  },
+};
+
+const proseComponents: Partial<PortableTextReactComponents> = {
   block: {
     h2: ({ children }) => (
       <h2 className="mb-4 mt-8 font-display text-3xl font-bold">{children}</h2>
@@ -27,24 +46,7 @@ const components: Partial<PortableTextReactComponents> = {
       </blockquote>
     ),
   },
-  marks: {
-    strong: ({ children }) => <strong className="font-bold">{children}</strong>,
-    em: ({ children }) => <em className="italic">{children}</em>,
-    link: ({ children, value }) => {
-      const target = value?.blank ? "_blank" : undefined;
-      const rel = value?.blank ? "noopener noreferrer" : undefined;
-      return (
-        <a
-          href={value?.href}
-          target={target}
-          rel={rel}
-          className="text-brand-secondary underline hover:no-underline"
-        >
-          {children}
-        </a>
-      );
-    },
-  },
+  marks,
   types: {
     image: ({ value }: { value: SanityImageSource }) => (
       <figure className="my-8">
@@ -62,17 +64,35 @@ const components: Partial<PortableTextReactComponents> = {
   },
 };
 
+const inlineComponents: Partial<PortableTextReactComponents> = {
+  block: {
+    normal: ({ children }) => <p className="m-0">{children}</p>,
+  },
+  marks,
+};
+
 interface CustomPortableTextProps {
   value: unknown[];
+  variant?: "prose" | "inline";
 }
 
-export default function PortableText({ value }: CustomPortableTextProps) {
+export default function PortableText({
+  value,
+  variant = "prose",
+}: CustomPortableTextProps) {
   if (!value?.length) return null;
+
+  if (variant === "inline") {
+    return (
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+      <BasePortableText value={value as any} components={inlineComponents} />
+    );
+  }
 
   return (
     <div className="prose max-w-none">
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <BasePortableText value={value as any} components={components} />
+      <BasePortableText value={value as any} components={proseComponents} />
     </div>
   );
 }

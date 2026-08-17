@@ -50,7 +50,7 @@ function toProfileSections(sections) {
     _type: "bulletList",
     _key: randomUUID().slice(0, 12),
     title: section.title,
-    items: section.items,
+    items: section.items.map(textToBlock),
   }));
 }
 

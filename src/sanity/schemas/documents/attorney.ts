@@ -131,8 +131,9 @@ export default defineType({
             defineField({
               name: "items",
               title: "Items",
-              type: "array",
-              of: [{ type: "string" }],
+              type: "simpleRichText",
+              description:
+                "Each paragraph becomes a bullet on the profile page. Bold, italic, and links are supported.",
               validation: (rule) => rule.required().min(1),
             }),
           ],
@@ -174,13 +175,24 @@ export default defineType({
                     defineField({
                       name: "value",
                       title: "Value",
-                      type: "text",
-                      rows: 2,
+                      type: "simpleRichText",
                       validation: (rule) => rule.required(),
                     }),
                   ],
                   preview: {
-                    select: { title: "label", subtitle: "value" },
+                    select: { title: "label", value: "value" },
+                    prepare({
+                      title,
+                      value,
+                    }: {
+                      title?: string;
+                      value?: { children?: { text?: string }[] }[];
+                    }) {
+                      return {
+                        title,
+                        subtitle: value?.[0]?.children?.[0]?.text,
+                      };
+                    },
                   },
                 }),
               ],
