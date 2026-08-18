@@ -7,7 +7,7 @@ export const mainDocuments = defineDocuments([
   },
   {
     route: "/insights",
-    filter: `_type == "page" && slug.current == "insights"`,
+    resolve: () => undefined,
   },
   {
     route: "/privacy-policy",
