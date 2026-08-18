@@ -2,20 +2,25 @@ import {
   PortableText as BasePortableText,
   type PortableTextReactComponents,
 } from "@portabletext/react";
+import { stegaClean } from "@sanity/client/stega";
 import SanityImage from "@/components/ui/SanityImage";
 import type { SanityImageSource } from "@/components/ui/SanityImage/types";
+import PortableTextTable, {
+  type PortableTextTableValue,
+} from "./Table";
 
 const marks: PortableTextReactComponents["marks"] = {
   strong: ({ children }) => <strong className="font-bold">{children}</strong>,
   em: ({ children }) => <em className="italic">{children}</em>,
   link: ({ children, value }) => {
-    const target = value?.blank ? "_blank" : undefined;
-    const rel = value?.blank ? "noopener noreferrer" : undefined;
+    const href = value?.href as string | undefined;
+    const isExternal =
+      Boolean(value?.blank) || stegaClean(href ?? "").startsWith("http");
     return (
       <a
-        href={value?.href}
-        target={target}
-        rel={rel}
+        href={href}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
         className="text-brand-secondary underline hover:no-underline"
       >
         {children}
@@ -26,6 +31,9 @@ const marks: PortableTextReactComponents["marks"] = {
 
 const proseComponents: Partial<PortableTextReactComponents> = {
   block: {
+    h1: ({ children }) => (
+      <h2 className="mb-4 mt-8 font-display text-3xl font-bold">{children}</h2>
+    ),
     h2: ({ children }) => (
       <h2 className="mb-4 mt-8 font-display text-3xl font-bold">{children}</h2>
     ),
@@ -52,6 +60,9 @@ const proseComponents: Partial<PortableTextReactComponents> = {
       <figure className="my-8">
         <SanityImage image={value} width={1200} height={675} sizes="100vw" />
       </figure>
+    ),
+    table: ({ value }: { value: PortableTextTableValue }) => (
+      <PortableTextTable value={value} />
     ),
   },
   list: {
